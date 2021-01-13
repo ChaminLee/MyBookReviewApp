@@ -19,42 +19,53 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
     }
+
     @IBAction func clickButton(_ sender: Any) {
-        saveInfo()
+        saveCustomer()
     }
-    @IBAction func updateInfo(_ sender: Any) {
+    @IBAction func updateButton(_ sender: Any) {
         updateInfos()
     }
-    @IBAction func deleteButton(_ sender: Any) {
+    @IBAction func delButton(_ sender: Any) {
         deleteInfo()
+    }
+    
+    @IBAction func readButton(_ sender: Any) {
+        readData()
     }
 }
 
 
 extension ViewController {
-    func saveInfo() {
-        db.child("test").setValue(3)
-        db.child("test2").setValue(33)
+    func saveCustomer() {
+        
+        let books = Book(title: "lovePoet", thumbnail: "썸네일", author: "이차민", date: "2021.01.13")
+        db.child("Customer1").setValue(["\(books.title)":books.toDictionary])
     }
     
     func updateInfos() {
-        db.updateChildValues(["test":300])
-        db.updateChildValues(["test2":3300])
+        guard let key = db.child("Customer1").childByAutoId().key else { return }
+        let updateBooks = Book(title: "실내인간", thumbnail: "썸네일2", author: "이차민2", date: "2021.01.14").toDictionary
+        let childUpdate = ["/Customer1/\(key)":updateBooks]
+        db.updateChildValues(childUpdate)
+       
     }
     func deleteInfo() {
-        db.child("test").removeValue()
-        db.child("test2").removeValue()
+        guard let key = db.child("Customer1").childByAutoId().key else { return }
+
+        db.child("/Customer1").removeValue()
+    }
+    
+    func readData() {
+        db.child("Customer1").observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? NSDictionary
+            let title = value!["title"] as? String ?? ""
+            print(value)
+            print(title)
+        })  { (error) in print(error.localizedDescription)}
     }
 }
 
-//extension ViewController {
-//    func fetchInfo() {
-//        db.child("customer").observeSingleEvent(of: .value) { snapshot in print("\(snapshot.value)"}
-//        do {
-//            let data = try JSONSerialization.data
-//        }
-//    }
-//}
 
 
 struct Customer: Codable {
