@@ -2,7 +2,7 @@
 //  DetailViewController.swift
 //  BookReviewApp
 //
-//  Created by 이차민 on 2021/01/29.
+//  Created by 이차민 on 2021/01/30.
 //
 
 import UIKit
@@ -11,19 +11,18 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        let closeButtton : UIButton = {
+            let bt = UIButton(frame: CGRect(x: 10, y: 10, width: 20, height: 20))
+            bt.backgroundColor = .red
+            bt.addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
+            return bt
+        }()
+        
+        self.view.addSubview(closeButtton)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func buttonClicked() {
+        dismiss(animated: true, completion: nil)
     }
-    */
 
 }

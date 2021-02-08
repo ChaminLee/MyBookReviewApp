@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import TagListView
 
 class SubCustomCell: UICollectionViewCell {
 
+    let tagListview : TagListView = TagListView()
+    
     var booklist: BookList? {
         didSet {
                 print("booklist",self.booklist)
@@ -25,7 +28,7 @@ class SubCustomCell: UICollectionViewCell {
         iv.image = UIImage(named: "0000.png")
         iv.contentMode = .scaleAspectFill // aspect유지하면서 화면에 꽉차게
         iv.clipsToBounds = true
-        iv.layer.cornerRadius = 5
+        iv.layer.cornerRadius = 7
         return iv
     }()
 
@@ -46,16 +49,36 @@ class SubCustomCell: UICollectionViewCell {
         lb.text = "Lee Cha Min"
         return lb
     }()
+    
+    // TagListView
+    
+ 
+    
+    
+    
+    
+//    let sectionButton : UIButton = {
+//        let bt = UIButton()
+//        bt.frame.size = CGSize(width: 30, height: 30)
+//        bt.tintColor = .white
+//        bt.setBackgroundImage(UIImage(systemName: "folder"), for: .normal)
+//        bt.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
+//        return bt
+//    }()
+//
+//    @objc func didTapButton() {
+//        print("Hello")
+//    }
 
     override init(frame: CGRect) {
     super.init(frame: frame)
         addSubview(ImageView)
         addSubview(TitleLabel)
         addSubview(AuthorLabel)
-
+//        addSubview(sectionButton)
 
         ImageView.translatesAutoresizingMaskIntoConstraints = false
-        ImageView.topAnchor.constraint(equalTo: topAnchor, constant: -10).isActive = true // image vs subcell
+        ImageView.topAnchor.constraint(equalTo: topAnchor, constant: 30).isActive = true // image vs subcell
         ImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
         ImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -5).isActive = true
         ImageView.heightAnchor.constraint(equalToConstant: 180).isActive = true
@@ -73,6 +96,9 @@ class SubCustomCell: UICollectionViewCell {
         AuthorLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
         AuthorLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
 
+//        sectionButton.translatesAutoresizingMaskIntoConstraints = false
+//        sectionButton.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
+//        sectionButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
 
 
     }

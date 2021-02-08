@@ -8,8 +8,10 @@
 
 import UIKit
 
+
 class CustomCell : UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource,
-                   UICollectionViewDelegateFlowLayout{
+                   UICollectionViewDelegateFlowLayout {
+
     
     var section: Section? {
         didSet {
@@ -50,23 +52,33 @@ class CustomCell : UICollectionViewCell, UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! SubCustomCell
         
-//        cell.backgroundColor = .yellow
         cell.booklist = booklists[indexPath.item]
+        
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = frame.width / 3
-        let height = frame.height / 2 + 60
+        // SubCustomCell size
+        let width = frame.width / 3 
+        let height = frame.height // / 2 + 60)
         
         return CGSize(width: width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         print("해당 아이템은 \(indexPath.item)번째")
+        
+        
+        // Segue 자리 
+                
     }
+    
+    // button action 관련
+    
+    
     
     let sectionTitleLabel : UILabel = {
         let lb = UILabel()
@@ -74,7 +86,6 @@ class CustomCell : UICollectionViewCell, UICollectionViewDelegate, UICollectionV
         lb.textColor = .white
         lb.font = UIFont.boldSystemFont(ofSize: 20)
         lb.font = UIFont.boldSystemFont(ofSize: 20)
-        lb.translatesAutoresizingMaskIntoConstraints = false
         
         return lb
     }()
@@ -83,9 +94,11 @@ class CustomCell : UICollectionViewCell, UICollectionViewDelegate, UICollectionV
         super.init(frame: frame)
         addSubview(sectionTitleLabel)
         
+        sectionTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         sectionTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
-        sectionTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8).isActive = true
+        sectionTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         sectionTitleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        
         
         setUpSubCell()
         collectionView.register(SubCustomCell.self, forCellWithReuseIdentifier: identifier)
@@ -109,3 +122,6 @@ class CustomCell : UICollectionViewCell, UICollectionViewDelegate, UICollectionV
     
     
 }
+
+
+
