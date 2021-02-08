@@ -32,9 +32,7 @@ extension HeartViewController {
         let label = UILabel()
         label.text = "하트"
         label.textColor = UIColor.white
-        label.textAlignment = .left
         self.navigationController?.navigationBar.topItem?.title = label.text
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
         self.navigationController?.navigationBar.barTintColor = .black
         self.navigationController?.navigationBar.prefersLargeTitles = true
     }

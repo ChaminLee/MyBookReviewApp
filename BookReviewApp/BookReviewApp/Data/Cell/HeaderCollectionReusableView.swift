@@ -42,7 +42,7 @@ class HeaderCollectionReusableView: UICollectionReusableView {
     }()
 
     public func configure() {
-        backgroundColor = .systemGreen
+//        backgroundColor = .systemGreen
         
         addSubview(descriptionLabel)
         addSubview(titleLabel)
@@ -53,7 +53,7 @@ class HeaderCollectionReusableView: UICollectionReusableView {
         
         NSLayoutConstraint.activate([
             // desc
-            descriptionLabel.topAnchor.constraint(equalTo: topAnchor, constant: 60),
+            descriptionLabel.topAnchor.constraint(equalTo: topAnchor, constant: 40),
             descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 13),
             descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -13),
             descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40),
@@ -64,7 +64,7 @@ class HeaderCollectionReusableView: UICollectionReusableView {
         ])
         
     }
-    }
+}
     
     
 

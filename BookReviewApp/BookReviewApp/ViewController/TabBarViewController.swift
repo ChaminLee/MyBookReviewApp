@@ -60,7 +60,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         
         
         UITabBar.appearance().isTranslucent = false
-        UITabBar.appearance().backgroundColor = .black
+//        UITabBar.appearance().backgroundColor = .black
         UITabBar.appearance().tintColor = .systemPink
         
         self.viewControllers = [tabOne, tabTwo, tab3, tab4, tab5]
@@ -72,10 +72,4 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
 //    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
 //        print(self.viewControllers)
 //    }
-    
-    
-}
-
-extension TabBarViewController {
-    
 }

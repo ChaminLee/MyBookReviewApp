@@ -62,7 +62,7 @@ class CustomCell : UICollectionViewCell, UICollectionViewDelegate, UICollectionV
         
         // SubCustomCell size
         let width = frame.width / 3 
-        let height = frame.height // / 2 + 60)
+        let height = frame.height 
         
         return CGSize(width: width, height: height)
     }

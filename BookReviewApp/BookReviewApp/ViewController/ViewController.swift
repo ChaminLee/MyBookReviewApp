@@ -12,6 +12,8 @@ import Firebase
 class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout{
     
     let identifier: String = "cellID"
+    let headerColor = UIColor(hexString: "#eaac9d")
+    let navAppearance = UINavigationBarAppearance()
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
@@ -36,7 +38,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     override func didReceiveMemoryWarning() {
-        super .didReceiveMemoryWarning()
+        super.didReceiveMemoryWarning()
     }
     
     // collectionView init
@@ -128,18 +130,13 @@ extension ViewController {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderCollectionReusableView", for: indexPath) as! HeaderCollectionReusableView
         
         header.configure()
-        
-        if (indexPath.section == 1 ) {
-            header.titleLabel.text = "Test if 0"
-        } else {
-            header.titleLabel.text = "Test if 1"
-        }
+        header.backgroundColor = headerColor
         
         return header
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.frame.width, height: 200)
+        return CGSize(width: view.frame.width, height: 180)
     }
     
     // header ~ body
@@ -170,15 +167,53 @@ extension ViewController {
 }
 
 extension ViewController {
+    
     func addTopTitle() {
-        let label = UILabel()
-        label.text = "책 속의 기억"
-        label.textColor = UIColor.white
+        let label : UILabel = {
+            let lb = UILabel()
+            lb.text = "기억"
+//            lb.font = UIFont(name: "Sweetheat-GOvoG", size: 20)
+            lb.textColor = UIColor.white
+            
+            return lb
+        }()
+        
+        self.navigationController?.preferredStatusBarStyle
+        self.navigationController?.navigationBar.backgroundColor = headerColor
         self.navigationController?.navigationBar.topItem?.title = label.text
-//        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
-        self.navigationController?.navigationBar.barTintColor = .black
+        self.navigationController?.navigationBar.barTintColor = headerColor
         self.navigationController?.navigationBar.prefersLargeTitles = true
+                
+        
     }
 }
 
+extension UIColor {
+    convenience init(hexString: String, alpha: CGFloat = 1.0) {
+        let hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        let scanner = Scanner(string: hexString)
+        if (hexString.hasPrefix("#")) {
+            scanner.scanLocation = 1
+        }
+        var color: UInt32 = 0
+        scanner.scanHexInt32(&color)
+        let mask = 0x000000FF
+        let r = Int(color >> 16) & mask
+        let g = Int(color >> 8) & mask
+        let b = Int(color) & mask
+        let red   = CGFloat(r) / 255.0
+        let green = CGFloat(g) / 255.0
+        let blue  = CGFloat(b) / 255.0
+        self.init(red:red, green:green, blue:blue, alpha:alpha)
+    }
+    func toHexString() -> String {
+        var r:CGFloat = 0
+        var g:CGFloat = 0
+        var b:CGFloat = 0
+        var a:CGFloat = 0
+        getRed(&r, green: &g, blue: &b, alpha: &a)
+        let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
+        return String(format:"#%06x", rgb)
+    }
+}
 

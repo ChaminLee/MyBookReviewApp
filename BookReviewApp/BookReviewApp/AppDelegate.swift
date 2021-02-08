@@ -23,8 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
 //        let nc = UINavigationController(rootViewController: ViewController())
-        
         window?.rootViewController = TabBarViewController()
+        
                         
         return true
     }
@@ -54,3 +54,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
+

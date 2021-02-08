@@ -40,10 +40,10 @@ extension UserInfoViewController {
         let label = UILabel()
         label.text = "내 정보"
         label.textColor = UIColor.white
-        label.textAlignment = .left
         self.navigationController?.navigationBar.topItem?.title = label.text
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: label)
         self.navigationController?.navigationBar.barTintColor = .black
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        
+        self.navigationController?.navigationItem.titleView = UIImageView(image: UIImage())
     }
 }
