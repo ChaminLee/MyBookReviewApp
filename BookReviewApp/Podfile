@@ -12,6 +12,8 @@ pod 'Firebase/Database'
 pod 'Firebase/Auth'
 pod 'Firebase/Firestore'
 pod 'Firebase/Analytics'
+pod 'TagListView', '~> 1.0'
+
   target 'BookReviewAppTests' do
     inherit! :search_paths
     # Pods for testing

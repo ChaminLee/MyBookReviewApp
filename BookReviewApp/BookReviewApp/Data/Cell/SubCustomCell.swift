@@ -14,27 +14,43 @@ class SubCustomCell: UICollectionViewCell {
     
     var booklist: BookList? {
         didSet {
-                print("booklist",self.booklist)
+                print("booklist", self.booklist)
             guard let booklist = self.booklist else { return }
             self.ImageView.image = UIImage(named: booklist.image)
             self.TitleLabel.text = self.booklist?.title
             self.AuthorLabel.text = self.booklist?.author
+            self.DateLabel.text = self.booklist?.date
         }
     }
 
+    // containerView > ImageView
+    let containerView: UIView = {
+        let uiv = UIView()
+        uiv.layer.shadowColor = UIColor.black.cgColor
+//        uiv.layer.shadowPath = UIBezierPath(roundedRect: <#T##CGRect#>, cornerRadius: <#T##CGFloat#>)
+        uiv.layer.shadowOffset = CGSize(width: 4, height: 4)
+        uiv.layer.shadowOpacity = 0.3
+        uiv.layer.shadowRadius = 8
+//        uiv.layer.shadowPath = CG
+        
+        return uiv
+    }()
+    
     let ImageView: UIImageView = {
         let iv = UIImageView()
-        iv.backgroundColor = .black
+        iv.backgroundColor = CustomColor().defaultBackgroundColor
         iv.image = UIImage(named: "0000.png")
+        
         iv.contentMode = .scaleAspectFill // aspect유지하면서 화면에 꽉차게
-        iv.clipsToBounds = true
-        iv.layer.cornerRadius = 7
+        iv.layer.cornerRadius = 8.0
+        iv.layer.masksToBounds = true
+        
         return iv
     }()
 
     let TitleLabel: UILabel = {
         let lb = UILabel()
-        lb.textColor = .white
+        lb.textColor = CustomColor().textColor
         lb.font = UIFont.systemFont(ofSize: 12)
         lb.font = UIFont.boldSystemFont(ofSize: 12)
         lb.text = "This is Book Title"
@@ -43,62 +59,64 @@ class SubCustomCell: UICollectionViewCell {
 
     let AuthorLabel : UILabel = {
         let lb = UILabel()
-        lb.textColor = .white
+        lb.textColor = CustomColor().textColor
         lb.font = UIFont.systemFont(ofSize: 10)
         lb.font = UIFont.boldSystemFont(ofSize: 10)
         lb.text = "Lee Cha Min"
         return lb
     }()
     
+    let DateLabel : UILabel = {
+        let lb = UILabel()
+        lb.textColor = .gray
+        lb.font = UIFont.systemFont(ofSize: 10)
+        lb.font = UIFont.boldSystemFont(ofSize: 10)
+        lb.text = "Lee Cha Min"
+        return lb
+    }()
     // TagListView
     
  
-    
-    
-    
-    
-//    let sectionButton : UIButton = {
-//        let bt = UIButton()
-//        bt.frame.size = CGSize(width: 30, height: 30)
-//        bt.tintColor = .white
-//        bt.setBackgroundImage(UIImage(systemName: "folder"), for: .normal)
-//        bt.addTarget(self, action: #selector(didTapButton), for: .touchUpInside)
-//        return bt
-//    }()
-//
-//    @objc func didTapButton() {
-//        print("Hello")
-//    }
 
     override init(frame: CGRect) {
     super.init(frame: frame)
-        addSubview(ImageView)
+        containerView.addSubview(ImageView)
+        addSubview(containerView)
         addSubview(TitleLabel)
         addSubview(AuthorLabel)
-//        addSubview(sectionButton)
-
+        addSubview(DateLabel)
+        
         ImageView.translatesAutoresizingMaskIntoConstraints = false
-        ImageView.topAnchor.constraint(equalTo: topAnchor, constant: 30).isActive = true // image vs subcell
-        ImageView.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
-        ImageView.rightAnchor.constraint(equalTo: rightAnchor, constant: -5).isActive = true
-        ImageView.heightAnchor.constraint(equalToConstant: 180).isActive = true
-        ImageView.bottomAnchor.constraint(equalTo: TitleLabel.topAnchor, constant: -10).isActive = true
-
+        containerView.translatesAutoresizingMaskIntoConstraints = false
         TitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        TitleLabel.topAnchor.constraint(equalTo: ImageView.bottomAnchor,constant: 15).isActive = true
-        TitleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
-        TitleLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
-//        TitleLabel.bottomAnchor.constraint(equalTo: ImageView.topAnchor).isActive = true
-
-
         AuthorLabel.translatesAutoresizingMaskIntoConstraints = false
-        AuthorLabel.topAnchor.constraint(equalTo: TitleLabel.bottomAnchor, constant: 5).isActive = true
-        AuthorLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
-        AuthorLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
+        DateLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            ImageView.topAnchor.constraint(equalTo: containerView.topAnchor),
+            ImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+            ImageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+            ImageView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+            
+            containerView.topAnchor.constraint(equalTo: topAnchor, constant: 25), // image vs subcell
+            containerView.leftAnchor.constraint(equalTo: leftAnchor, constant: 10),
+            containerView.rightAnchor.constraint(equalTo: rightAnchor, constant: -5),
+            containerView.heightAnchor.constraint(equalToConstant: 180),
+            
+            TitleLabel.topAnchor.constraint(equalTo: containerView.bottomAnchor,constant: 20),
+            TitleLabel.leftAnchor.constraint(equalTo: containerView.leftAnchor),
+            TitleLabel.rightAnchor.constraint(equalTo: containerView.rightAnchor),
 
-//        sectionButton.translatesAutoresizingMaskIntoConstraints = false
-//        sectionButton.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
-//        sectionButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
+            AuthorLabel.topAnchor.constraint(equalTo: TitleLabel.bottomAnchor, constant: 5),
+            AuthorLabel.leftAnchor.constraint(equalTo: containerView.leftAnchor),
+            AuthorLabel.rightAnchor.constraint(equalTo: containerView.rightAnchor),
+            
+            DateLabel.topAnchor.constraint(equalTo: AuthorLabel.bottomAnchor, constant: 5),
+            DateLabel.leftAnchor.constraint(equalTo: containerView.leftAnchor),
+            DateLabel.rightAnchor.constraint(equalTo: containerView.rightAnchor)
+        ])
+        
+        
 
 
     }

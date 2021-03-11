@@ -37,6 +37,7 @@ class CustomCell : UICollectionViewCell, UICollectionViewDelegate, UICollectionV
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
+        cv.backgroundColor = CustomColor().defaultBackgroundColor
         // scroll bar 없애기
         cv.showsHorizontalScrollIndicator = false
         cv.translatesAutoresizingMaskIntoConstraints = false
@@ -83,7 +84,7 @@ class CustomCell : UICollectionViewCell, UICollectionViewDelegate, UICollectionV
     let sectionTitleLabel : UILabel = {
         let lb = UILabel()
         lb.textColor = .systemPink
-        lb.textColor = .white
+        lb.textColor = CustomColor().textColor
         lb.font = UIFont.boldSystemFont(ofSize: 20)
         lb.font = UIFont.boldSystemFont(ofSize: 20)
         

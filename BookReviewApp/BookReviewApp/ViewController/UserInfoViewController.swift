@@ -5,45 +5,44 @@
 //  Created by 이차민 on 2021/01/29.
 //
 
+// 읽은 책 수, 적은 글귀 수, 작가들, 책 이름들, 문의하기, 
+
 import UIKit
 
 class UserInfoViewController: UIViewController {
 
+    
+    let fieldView = UIView()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = CustomColor().defaultBackgroundColor
         addTopTitle()
-//        self.navigationController?.navigationBar.topItem?.title = "내 정보"
-        
-        view.backgroundColor = .systemGray2
-        
-        let label : UILabel = {
-            let lb = UILabel(frame: CGRect(x: 50, y: 50, width: self.view.frame.width, height: 50))
-            lb.textColor = .black
-            lb.font = UIFont(name: "Helvetica-Bold", size: 30)
-            lb.text = "EEEEEE"
-            return lb
-        }()
-        
-        self.view.addSubview(label)
-        
     }
+    
     override func didReceiveMemoryWarning() {
         super .didReceiveMemoryWarning()
     }
-     
+
 
 }
 
 
 extension UserInfoViewController {
-    func addTopTitle() {
-        let label = UILabel()
-        label.text = "내 정보"
-        label.textColor = UIColor.white
-        self.navigationController?.navigationBar.topItem?.title = label.text
-        self.navigationController?.navigationBar.barTintColor = .black
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+    func addTopTitle(){
+        let label : UILabel = {
+            let lb = UILabel()
+            lb.text = "내 정보"
+            lb.textColor = UIColor.white
+            
+            return lb
+        }()
         
-        self.navigationController?.navigationItem.titleView = UIImageView(image: UIImage())
+        self.navigationController?.navigationBar.prefersLargeTitles = false
+//        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: CustomColor().textColor]
+
+        self.navigationController?.navigationBar.topItem?.title = label.text
+        self.navigationController?.navigationBar.barTintColor = CustomColor().defaultBackgroundColor
+        
     }
 }

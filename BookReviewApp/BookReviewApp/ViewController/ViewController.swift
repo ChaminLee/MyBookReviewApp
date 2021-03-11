@@ -12,7 +12,9 @@ import Firebase
 class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout{
     
     let identifier: String = "cellID"
-    let headerColor = UIColor(hexString: "#eaac9d")
+
+    
+    let headerColor = UIColor(hexString: "#117893")
     let navAppearance = UINavigationBarAppearance()
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -27,11 +29,17 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return .default
     }
     
+    public func randomColor() -> String {
+        let colorList = ["#eaac9d","f0daa4","#117893", "#fd823e","4ec5a5"]
+        let index = Int.random(in: 0..<colorList.count)
+         
+        return colorList[index]
+    }
     
     // if you made collectionview programmatically, you can use collectionview just call "collectionView"
     override func viewDidLoad() {
         super.viewDidLoad()
-                        
+        
         addTopTitle()
         addCollectionView()
         fetchJson()
@@ -44,6 +52,8 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     // collectionView init
     init() {
         super.init(collectionViewLayout: UICollectionViewLayout())
+        addTopTitle()
+//        view.backgroundColor = CustomColor().defaultBackgroundColor
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -124,7 +134,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     
 // Header View
-extension ViewController {
+extension ViewController  {
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderCollectionReusableView", for: indexPath) as! HeaderCollectionReusableView
@@ -134,7 +144,7 @@ extension ViewController {
         
         return header
     }
-    
+ 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.width, height: 180)
     }
@@ -143,21 +153,68 @@ extension ViewController {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 30, left: 50, bottom: 30, right: 50)
     }
+
+    
+}
+
+class stretchHeaderFlowLayout: UICollectionViewFlowLayout {
+    
+    let idealCellWidth: CGFloat = 100
+    let margin: CGFloat = 10
+    
+    override init() {
+        super.init()
+    }
+    
+    required init?(coder aDecoder : NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+            
+        let layoutAttributes = super.layoutAttributesForElements(in: rect)
+        guard let offset = collectionView?.contentOffset.y, let stLayoutAttributes = layoutAttributes else {
+            return layoutAttributes
+        }
+        if offset < 0 {
+            
+            for attributes in stLayoutAttributes {
+                
+                if let elmKind = attributes.representedElementKind, elmKind == UICollectionView.elementKindSectionHeader {
+                    
+                    let width = collectionView?.frame.width
+                    let height = attributes.frame.height - offset
+                    
+                    attributes.frame = CGRect(x: 0, y: offset, width: width ?? 0, height: height)
+                }
+            }
+        }
+        return layoutAttributes
+    }
+    
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        return true
+    }
+    
+    
 }
 
 // collectionView 추가
 
 extension ViewController {
     func addCollectionView() {
-        collectionView.backgroundColor = .white
         
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
+//        let layout = UICollectionViewFlowLayout()
+        let flowLayout = stretchHeaderFlowLayout()
+        flowLayout.scrollDirection = .vertical
         
-        collectionView = UICollectionView(frame: CGRect(x: 0, y: 200, width: self.view.frame.width, height: self.view.frame.height), collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: CGRect(x: 0, y: 200, width: self.view.frame.width, height: self.view.frame.height), collectionViewLayout: flowLayout)
+        collectionView.backgroundColor = CustomColor().defaultBackgroundColor
         collectionView.showsVerticalScrollIndicator = false
         collectionView.delegate = self
         collectionView.dataSource = self
+        
         
         collectionView.register(HeaderCollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderCollectionReusableView")
         collectionView.register(CustomCell.self, forCellWithReuseIdentifier: identifier)
@@ -173,17 +230,19 @@ extension ViewController {
             let lb = UILabel()
             lb.text = "기억"
 //            lb.font = UIFont(name: "Sweetheat-GOvoG", size: 20)
-            lb.textColor = UIColor.white
+            lb.textColor = CustomColor().defaultBackgroundColor
             
             return lb
         }()
         
-        self.navigationController?.preferredStatusBarStyle
         self.navigationController?.navigationBar.backgroundColor = headerColor
-        self.navigationController?.navigationBar.topItem?.title = label.text
         self.navigationController?.navigationBar.barTintColor = headerColor
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-                
+        self.navigationController?.setStatusBar(backgroundColor: headerColor)
+        
+        self.navigationController?.navigationBar.topItem?.title = label.text
+        
+        self.navigationController?.navigationBar.isTranslucent = false
+        
         
     }
 }
@@ -217,3 +276,18 @@ extension UIColor {
     }
 }
 
+extension UINavigationController {
+
+    func setStatusBar(backgroundColor: UIColor) {
+        let statusBarFrame: CGRect
+        if #available(iOS 13.0, *) {
+            statusBarFrame = view.window?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero
+        } else {
+            statusBarFrame = UIApplication.shared.statusBarFrame
+        }
+        let statusBarView = UIView(frame: statusBarFrame)
+        statusBarView.backgroundColor = backgroundColor
+        view.addSubview(statusBarView)
+    }
+
+}

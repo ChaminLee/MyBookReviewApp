@@ -10,30 +10,38 @@ import UIKit
 class HeartViewController: UIViewController {
 
     let headerView : UIView? = UIView()
-    
+    let scrollView = UIScrollView()
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = CustomColor().defaultBackgroundColor
         addTopTitle()
         self.navigationItem.title = "최애"
-//        self.navigationController?.navigationBar.topItem?.title = "최애"
-
-        headerView?.frame(forAlignmentRect: CGRect(x: 0, y: 20, width: self.view.frame.width, height: self.view.frame.height/6))
-        headerView?.backgroundColor = .white
+            
+//        headerView?.frame(forAlignmentRect: CGRect(x: 0, y: 20, width: self.view.frame.width, height: self.view.frame.height/6))
+//        headerView?.backgroundColor = .white
         
-        self.view.addSubview(headerView ?? UIView())
+//        self.view.addSubview(headerView ?? UIView())
+        
     }
-    
-
+ 
 }
 
 
 extension HeartViewController {
     func addTopTitle() {
-        let label = UILabel()
-        label.text = "하트"
-        label.textColor = UIColor.white
-        self.navigationController?.navigationBar.topItem?.title = label.text
-        self.navigationController?.navigationBar.barTintColor = .black
+        let label : UILabel = {
+            let lb = UILabel()
+            lb.text = "하트"
+            lb.textColor = UIColor.white
+            
+            return lb
+        }()
+        
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: CustomColor().textColor]
+        
+        self.navigationController?.navigationBar.topItem?.title = label.text
+        self.navigationController?.navigationBar.barTintColor = .white
+        
     }
 }
