@@ -18,6 +18,10 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
     let authorInput = UITextField(frame: CGRect(x: 10, y: 320, width: 300.0, height: 30.0))
     let dateInput = UITextField(frame: CGRect(x: 10, y: 320, width: 300.0, height: 30.0))
     
+    var titleList = [String]()
+    var authorList = [String]()
+    var dateList = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = CustomColor().defaultBackgroundColor
@@ -39,9 +43,18 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
     }
     
-    
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        var temp = textField.text!
+//
+//        if textField.tag == 1 {
+//            titleList.append(temp)
+//        } else if textField.tag == 2 {
+//            authorList.append(temp)
+//        } else {
+//            dateList.append(temp)
+//        }
+//    }
 
-    
 //    func setupScrollView() {
 //        scrollView.translatesAutoresizingMaskIntoConstraints = false
 //
@@ -77,15 +90,14 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         bt.tintColor = CustomColor().textColor
         bt.addTarget(self, action: #selector(close), for: .touchUpInside)
 //        bt.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
-
-        
+  
         return bt
     }()
     
     let doneButton : UIButton = {
         let bt = UIButton()
         bt.setTitle("완료", for: .normal)
-        bt.titleLabel?.font = UIFont(name: "Helvetica-Bold", size: 20)
+        bt.titleLabel?.font = UIFont(name: "Helvetica", size: 20)
         bt.setTitleColor(CustomColor().textColor, for: .normal)
         
         // need to change #selector
@@ -96,9 +108,31 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
     
     @objc func btnTouched() {
         print("Image Clicked")
+        print("titleList : \(titleList)")
+        print("authorList : \(authorList)")
+        print("dateList : \(dateList)")
     }
     
     @objc func close() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    // 수정 필요
+    @objc func complete() {
+        func textFieldDidEndEditing(_ textField: UITextField) {
+            var temp = textField.text!
+            
+            if textField.tag == 1 {
+                titleList.append(temp)
+            } else if textField.tag == 2 {
+                authorList.append(temp)
+            } else {
+                dateList.append(temp)
+            }
+        }
+        print("titleList : \(titleList)")
+        print("authorList : \(authorList)")
+        print("dateList : \(dateList)")
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -191,6 +225,10 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         authorInput.delegate = self
         dateInput.delegate = self
         
+        titleInput.tag = 1
+        authorInput.tag = 2
+        dateInput.tag = 3
+        
         let subviewList = [closeButton, doneButton, imgAddButton,titleText,titleInput,authorText,authorInput,dateText,dateInput]
         
         for subview in subviewList {
@@ -209,8 +247,7 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
             
             imgAddButton.topAnchor.constraint(equalTo: closeButton.topAnchor, constant: 100),
             imgAddButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-  
-            
+       
             titleText.topAnchor.constraint(equalTo: imgAddButton.bottomAnchor, constant: 140),
             titleText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             titleText.heightAnchor.constraint(equalToConstant: 50),
