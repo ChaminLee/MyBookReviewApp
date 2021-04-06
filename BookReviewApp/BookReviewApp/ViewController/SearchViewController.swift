@@ -9,7 +9,6 @@ import UIKit
 
 class SearchViewController: UIViewController {
 
-    let ti = UITextField(frame: CGRect(x: 10, y: 320, width: 300.0, height: 30.0))
     let scrollView = UIScrollView()
     
     override func viewDidLoad() {
@@ -17,23 +16,38 @@ class SearchViewController: UIViewController {
         view.backgroundColor = CustomColor().defaultBackgroundColor
         addTopTitle()
 
-        ti.backgroundColor = CustomColor().defaultBackgroundColor
-        ti.borderStyle = UITextField.BorderStyle.roundedRect
-        ti.layer.borderColor = UIColor.gray.cgColor
-        ti.layer.borderWidth = 2
-        ti.textColor = CustomColor().textColor
+        let custombt : UIButton = {
+            let bt = UIButton(frame: CGRect(x: 10, y: 300, width: 300, height: 300))
+            bt.setTitle("READ DATA", for: .normal)
+            bt.titleLabel?.font = UIFont(name: "Helvetica", size: 20)
+            bt.setTitleColor(.blue, for: .normal)
+            
+            bt.addTarget(self, action: #selector(readData), for: .touchUpInside)
+            return bt
+        }()
         
-        ti.attributedPlaceholder = NSAttributedString(string: "책 제목을 입력해주세요", attributes: [NSAttributedString.Key.foregroundColor : UIColor.gray, NSAttributedString.Key.font: UIFont(name: "Helvetica", size: 10)!])
-        
-        ti.delegate = self
-        ti.tag = 1
-        
-        scrollView.addSubview(ti)
-        setupScrollView()
-        initializeHideKeyboard()
-        
-
+        view.addSubview(custombt)
+//        setupScrollView()
+//        initializeHideKeyboard()
     }
+    
+    
+    @objc func readData() {
+        print("----testing----")
+//        FirebaseDB.dbref.observe(.value) { (snapshot) in
+//            if let result = snapshot.value as? [Any] {
+//                result.forEach { (item) in
+//                    let section = Section(dictionary: item as! [String : Any])
+//                    print("---test section \(section)")
+//                    self.testList.append(section)
+//                }
+//
+//            }
+//
+//        }
+    }
+    
+    
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()

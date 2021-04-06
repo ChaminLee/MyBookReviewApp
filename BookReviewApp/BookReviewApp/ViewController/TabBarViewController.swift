@@ -25,7 +25,6 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setupTabBars()
-        
     }
     
     func setupTabBars() {
@@ -37,7 +36,6 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         tabOne.tabBarItem = tabOneBarItem
         
         // SearchTab
-        
         let tabTwo = UINavigationController(rootViewController: SearchViewController())
 //        tabTwo = SearchViewController()
         let tabTwoBarItem2 = UITabBarItem(title: "검색", image: UIImage(systemName: "magnifyingglass"), selectedImage: UIImage(systemName: "magnifyingglass",withConfiguration: UIImage.SymbolConfiguration(weight: .bold)))
@@ -47,14 +45,12 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         // contents view
         
 //        let tab3 = UINavigationController(rootViewController: AddBookViewController())
-        
         // for present modal
         tab3 = AddBookViewController()
         let tab3Item = UITabBarItem(title: "기록하기", image: UIImage(systemName: "plus"), selectedImage: UIImage(systemName: "plus", withConfiguration: UIImage.SymbolConfiguration(weight: .bold)))
 
         tab3.tabBarItem = tab3Item
-        
-        
+                
         let tab4 = UINavigationController(rootViewController: HeartViewController())
         
 //        tab4 = HeartViewController()
@@ -74,12 +70,9 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
         UITabBar.appearance().barTintColor = CustomColor().defaultBackgroundColor
         UITabBar.appearance().tintColor = .systemPink
         
-
-        
         self.viewControllers = [tabOne, tabTwo, tab3, tab4, tab5]
         
     }
-    
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
       if viewController.isKind(of: AddBookViewController.self) {
@@ -90,5 +83,4 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
       }
       return true
     }
-    
 }

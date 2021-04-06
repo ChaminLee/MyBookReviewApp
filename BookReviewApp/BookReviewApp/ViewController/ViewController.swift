@@ -12,7 +12,6 @@ import Firebase
 class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout{
     
     let identifier: String = "cellID"
-
     
     let headerColor = UIColor(hexString: "#117893")
     let navAppearance = UINavigationBarAppearance()
@@ -42,7 +41,8 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         addTopTitle()
         addCollectionView()
-        fetchJson()
+//        fetchJson()
+        fetchData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -52,7 +52,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     // collectionView init
     init() {
         super.init(collectionViewLayout: UICollectionViewLayout())
-        addTopTitle()
+//        addTopTitle()
 //        view.backgroundColor = CustomColor().defaultBackgroundColor
     }
     
@@ -102,17 +102,19 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     func fetchJson(){
         print("attempt to fetch Json")
-        if let path = Bundle.main.path(forResource: "data", ofType: "json") {
+        if let path = Bundle.main.path(forResource: "test", ofType: "json") {
             print(path)
             do {
                   let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                   let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-                if let jsonResult = jsonResult as? [ Any] {
+                print("--------------json \(jsonResult)")
+                if let jsonResult = jsonResult as? [Any] {
                             // do stuff
                     jsonResult.forEach { (item) in
-                      
+                        print("item is \(item)")
                         let section = Section(dictionary: item as! [String : Any])
                        // print("FEtching",section.playlists)
+                        print("------section : \(section)")
                         self.sections.append(section)
                     }
                     
@@ -125,11 +127,26 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
         }
     }
     
+    
+    func fetchData() {
+        print("attempt to fetch FireBase Realtime Database")
+            FirebaseDB.dbref.observe(.value) { (snapshot) in
+                if let result = snapshot.value as? [Any] {
+                    result.forEach { (item) in
+                        let section = Section(dictionary: item as! [String : Any])
+                        print("---test section \(section)")
+                        self.sections.append(section)
+                    }
+                    self.collectionView.reloadData()
+                }
+                
+            }
+    }
+    
+    
     @objc func didTapButton() {
         print("HHsdfHH")
     }
-
-    
 }
     
     
@@ -153,8 +170,6 @@ extension ViewController  {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 30, left: 50, bottom: 30, right: 50)
     }
-
-    
 }
 
 class stretchHeaderFlowLayout: UICollectionViewFlowLayout {
@@ -169,8 +184,7 @@ class stretchHeaderFlowLayout: UICollectionViewFlowLayout {
     required init?(coder aDecoder : NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
+        
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
             
         let layoutAttributes = super.layoutAttributesForElements(in: rect)
@@ -192,12 +206,9 @@ class stretchHeaderFlowLayout: UICollectionViewFlowLayout {
         }
         return layoutAttributes
     }
-    
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
-    
-    
 }
 
 // collectionView 추가

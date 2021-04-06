@@ -11,7 +11,7 @@ import Firebase
 
 // present modal로
 class AddBookViewController: UIViewController, UITextFieldDelegate {
-    
+     
 //    let scrollView = UIScrollView()
 
     let titleInput = UITextField(frame: CGRect(x: 10, y: 320, width: 300.0, height: 30.0))
@@ -22,6 +22,8 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
     var authorList = [String]()
     var dateList = [String]()
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = CustomColor().defaultBackgroundColor
@@ -31,8 +33,6 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
  
         keyboardSetup()
         hideKeyboardWhenTappedAround()
-        
-        
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -42,18 +42,6 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        var temp = textField.text!
-//
-//        if textField.tag == 1 {
-//            titleList.append(temp)
-//        } else if textField.tag == 2 {
-//            authorList.append(temp)
-//        } else {
-//            dateList.append(temp)
-//        }
-//    }
 
 //    func setupScrollView() {
 //        scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -89,7 +77,6 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         bt.imageEdgeInsets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
         bt.tintColor = CustomColor().textColor
         bt.addTarget(self, action: #selector(close), for: .touchUpInside)
-//        bt.imageEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
   
         return bt
     }()
@@ -101,7 +88,7 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         bt.setTitleColor(CustomColor().textColor, for: .normal)
         
         // need to change #selector
-        bt.addTarget(self, action: #selector(close), for: .touchUpInside)
+        bt.addTarget(self, action: #selector(complete), for: .touchUpInside)
         
         return bt
     }()
@@ -118,21 +105,22 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
     }
     
     // 수정 필요
+    
+    var cnt = 0
     @objc func complete() {
-        func textFieldDidEndEditing(_ textField: UITextField) {
-            var temp = textField.text!
-            
-            if textField.tag == 1 {
-                titleList.append(temp)
-            } else if textField.tag == 2 {
-                authorList.append(temp)
-            } else {
-                dateList.append(temp)
-            }
+        let titleData = titleInput.text!
+        let authorData = authorInput.text!
+        let dateData = dateInput.text!
+//        let key = FirebaseDB.dbref.childByAutoId().key
+        let imgData = "보통의 존재.png"
+        
+        if titleData != "" && authorData != "" && dateData != "" {
+            let data = ["title": titleData,"author": authorData,"date": dateData, "image" : imgData]
+            FirebaseDB.dbref.child("0/bookList/\(cnt)").setValue(data)
+            cnt += 1
         }
-        print("titleList : \(titleList)")
-        print("authorList : \(authorList)")
-        print("dateList : \(dateList)")
+        
+        
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -342,4 +330,5 @@ extension UITextField {
         layer.addSublayer(bottomLine)
     }
 }
+
 

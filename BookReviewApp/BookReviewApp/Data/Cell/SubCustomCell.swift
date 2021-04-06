@@ -10,7 +10,7 @@ import TagListView
 
 class SubCustomCell: UICollectionViewCell {
 
-    let tagListview : TagListView = TagListView()
+//    let tagListview : TagListView = TagListView()
     
     var booklist: BookList? {
         didSet {
@@ -39,7 +39,7 @@ class SubCustomCell: UICollectionViewCell {
     let ImageView: UIImageView = {
         let iv = UIImageView()
         iv.backgroundColor = CustomColor().defaultBackgroundColor
-        iv.image = UIImage(named: "0000.png")
+//        iv.image = UIImage(named: "0000.png")
         
         iv.contentMode = .scaleAspectFill // aspect유지하면서 화면에 꽉차게
         iv.layer.cornerRadius = 8.0
@@ -74,7 +74,6 @@ class SubCustomCell: UICollectionViewCell {
         lb.text = "Lee Cha Min"
         return lb
     }()
-    // TagListView
     
  
 
