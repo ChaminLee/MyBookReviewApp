@@ -52,10 +52,19 @@ class SearchViewController: UIViewController {
         return lb
     }()
     
+    let errorMessage : UILabel = {
+        let lb = UILabel()
+        lb.font = UIFont(name: "Helvetica-Bold", size: 20)
+        lb.textColor = CustomColor().textColor
+        
+        return lb
+    }()
+    
     func config() {
         view.addSubview(searchBookImage)
         view.addSubview(searchTitle)
         view.addSubview(searchAuthor)
+        view.addSubview(errorMessage)
         
         searchBookImage.snp.makeConstraints{
             $0.top.equalToSuperview().offset(200)
@@ -72,6 +81,11 @@ class SearchViewController: UIViewController {
         searchAuthor.snp.makeConstraints {
             $0.top.equalTo(searchTitle).offset(30)
             $0.left.equalTo(searchTitle)
+        }
+        
+        errorMessage.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().offset(200)
         }
     }
 }
@@ -100,6 +114,8 @@ extension SearchViewController {
         searchBar.sizeToFit()
         searchBar.delegate = self
         showSearchBarButton(shouldShow: true)
+        searchBar.placeholder = "책 제목을 입력해주세요."
+        searchBar.tintColor = .black
     }
     
     @objc func handleShowSearchBar() {
@@ -115,6 +131,12 @@ extension SearchViewController {
 extension SearchViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         print("editing..")
+        OperationQueue.main.addOperation {
+            self.searchBookImage.image = nil
+            self.searchTitle.text = nil
+            self.searchAuthor.text = nil
+            self.errorMessage.text = nil
+        }
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
@@ -154,20 +176,34 @@ extension SearchViewController: UISearchBarDelegate {
 
 extension SearchViewController {
     func urlTaskDone() {
-        let item = dataManager.shared.searchResult?.items[0]
+        // 데이터가 있을 때
+        if (dataManager.shared.searchResult?.items.count)! > 0 {
+            guard let item = dataManager.shared.searchResult?.items[0] else { return }
+                do {
+                    let imageURL = URL(string: "\(item.image)")
+                    let imageData = try Data(contentsOf: imageURL!)
+                    let posterImage = UIImage(data: imageData)
+                    OperationQueue.main.addOperation {
+                        self.searchBookImage.image = posterImage
+                        self.searchTitle.text = item.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+                        self.searchAuthor.text = item.author
+                        self.errorMessage.text = nil
+                    }
+                } catch {
 
-        do {
-            let imageURL = URL(string: "\(item!.image)")
-            let imageData = try Data(contentsOf: imageURL!)
-            let posterImage = UIImage(data: imageData)
+                }
+            
+        } else {
             OperationQueue.main.addOperation {
-                self.searchBookImage.image = posterImage
-                self.searchTitle.text = item?.title
-                self.searchAuthor.text = item?.author
+                self.searchBookImage.image = nil
+                self.searchTitle.text = nil 
+                self.searchAuthor.text = nil
+                self.errorMessage.text = "'\(self.searchBar.text!)'을(를) 찾을 수 없습니다."
             }
-        } catch {
-
+            
         }
+        
+         
     }
     
     func requestToNaver(customQuery: String) {

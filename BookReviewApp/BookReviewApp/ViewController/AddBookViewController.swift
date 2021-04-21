@@ -217,6 +217,9 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         authorInput.tag = 2
         dateInput.tag = 3
 
+        let subviews = [closeButton,doneButton,imgAddButton,titleText,titleInput,authorText,authorInput,dateText,dateInput]
+        subviews.map {view.addSubview($0)}
+        
         closeButton.snp.makeConstraints {
             $0.top.equalToSuperview().offset(20)
             $0.left.equalToSuperview().offset(15)
