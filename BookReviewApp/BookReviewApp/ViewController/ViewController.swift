@@ -8,7 +8,6 @@
 import UIKit
 import Firebase
 
-
 class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout{
     
     let identifier: String = "cellID"
@@ -16,14 +15,20 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     let headerColor = UIColor(hexString: "#117893")
     let navAppearance = UINavigationBarAppearance()
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showDetail" {
-            let vc = segue.destination as? DetailViewController
-            
-            vc?.modalPresentationStyle = .popover
-        }
-    }
+    ////// 재 정비
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "segue1" {
+//            let vc = segue.destination as? DetailViewController
+//
+//            vc?.modalPresentationStyle = .popover
+//        } else if segue.identifier == "segue0" {
+//            let vc = segue.destination as? DetailViewController
+//
+//            vc?.modalPresentationStyle = .popover
+//        }
+//    }
     
+   
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
@@ -52,7 +57,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     // collectionView init
     init() {
         super.init(collectionViewLayout: UICollectionViewLayout())
-//        addTopTitle()
+        addTopTitle()
 //        view.backgroundColor = CustomColor().defaultBackgroundColor
     }
     
@@ -79,8 +84,10 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! CustomCell
         
+        
         cell.section = sections[indexPath.item]
         cell.collectionView.reloadData()
+        
         
         return cell
     }
@@ -94,7 +101,15 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("sss : \(indexPath.row)")
+        // 책 제목으로 segue 연결
+        var itemCount = sections[indexPath.item].bookList.count
+        var seg = sections[indexPath.item].bookList
+        print("SS: \(seg)")
         // move view
+        
+        self.present(DetailViewController(), animated: true, completion: nil)
+        DetailViewController().name = sections[indexPath.row].title
+        // 재정비        
         
     }
     
@@ -135,7 +150,10 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
                     result.forEach { (item) in
                         let section = Section(dictionary: item as! [String : Any])
                         print("---test section \(section)")
+                        
                         self.sections.append(section)
+                        
+                        
                     }
                     self.collectionView.reloadData()
                 }
@@ -173,33 +191,33 @@ extension ViewController  {
 }
 
 class stretchHeaderFlowLayout: UICollectionViewFlowLayout {
-    
+
     let idealCellWidth: CGFloat = 100
     let margin: CGFloat = 10
-    
+
     override init() {
         super.init()
     }
-    
+
     required init?(coder aDecoder : NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-        
+
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-            
+
         let layoutAttributes = super.layoutAttributesForElements(in: rect)
         guard let offset = collectionView?.contentOffset.y, let stLayoutAttributes = layoutAttributes else {
             return layoutAttributes
         }
         if offset < 0 {
-            
+
             for attributes in stLayoutAttributes {
-                
+
                 if let elmKind = attributes.representedElementKind, elmKind == UICollectionView.elementKindSectionHeader {
-                    
+
                     let width = collectionView?.frame.width
                     let height = attributes.frame.height - offset
-                    
+
                     attributes.frame = CGRect(x: 0, y: offset, width: width ?? 0, height: height)
                 }
             }
@@ -216,7 +234,7 @@ class stretchHeaderFlowLayout: UICollectionViewFlowLayout {
 extension ViewController {
     func addCollectionView() {
         
-//        let layout = UICollectionViewFlowLayout()
+//        let flowLayout = UICollectionViewFlowLayout()
         let flowLayout = stretchHeaderFlowLayout()
         flowLayout.scrollDirection = .vertical
         
@@ -302,3 +320,6 @@ extension UINavigationController {
     }
 
 }
+
+
+

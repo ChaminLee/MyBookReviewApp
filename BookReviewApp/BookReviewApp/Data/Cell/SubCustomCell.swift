@@ -6,20 +6,23 @@
 //
 
 import UIKit
-import TagListView
+import SnapKit
 
 class SubCustomCell: UICollectionViewCell {
-
-//    let tagListview : TagListView = TagListView()
+    
+    //    let tagListview : TagListView = TagListView()
+//    var parentViewController: UIViewController? = nil
     
     var booklist: BookList? {
         didSet {
+            // 수정 필요
                 print("booklist", self.booklist)
             guard let booklist = self.booklist else { return }
             self.ImageView.image = UIImage(named: booklist.image)
             self.TitleLabel.text = self.booklist?.title
             self.AuthorLabel.text = self.booklist?.author
             self.DateLabel.text = self.booklist?.date
+            
         }
     }
 
@@ -75,8 +78,20 @@ class SubCustomCell: UICollectionViewCell {
         return lb
     }()
     
+//    let button : UIButton = {
+//        let bt = UIButton()
+//        bt.alpha = 0
+//        bt.addTarget(self, action: #selector(gotoNewVC), for: .touchUpInside)
+//
+//        return bt
+//    }()
  
 
+//    @objc func gotoNewVC() {
+//        let newVC = DetailViewController()
+//        parentViewController?.present(newVC, animated: true, completion: nil)
+//    }
+    
     override init(frame: CGRect) {
     super.init(frame: frame)
         containerView.addSubview(ImageView)
@@ -84,12 +99,20 @@ class SubCustomCell: UICollectionViewCell {
         addSubview(TitleLabel)
         addSubview(AuthorLabel)
         addSubview(DateLabel)
+//        addSubview(button)
         
         ImageView.translatesAutoresizingMaskIntoConstraints = false
         containerView.translatesAutoresizingMaskIntoConstraints = false
         TitleLabel.translatesAutoresizingMaskIntoConstraints = false
         AuthorLabel.translatesAutoresizingMaskIntoConstraints = false
         DateLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+//        button.snp.makeConstraints {
+//            $0.top.equalToSuperview()
+//            $0.bottom.equalToSuperview()
+//            $0.left.equalToSuperview()
+//            $0.right.equalToSuperview()
+//        }
         
         NSLayoutConstraint.activate([
             ImageView.topAnchor.constraint(equalTo: containerView.topAnchor),

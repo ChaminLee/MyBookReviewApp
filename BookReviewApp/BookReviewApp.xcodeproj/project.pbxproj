@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -30,6 +30,8 @@
 		C98223DF25D18FEE0024C389 /* Besar-K7MOA.otf in Resources */ = {isa = PBXBuildFile; fileRef = C98223DB25D18FEE0024C389 /* Besar-K7MOA.otf */; };
 		C98223E025D18FEE0024C389 /* Besar-K7MOA.otf in Resources */ = {isa = PBXBuildFile; fileRef = C98223DB25D18FEE0024C389 /* Besar-K7MOA.otf */; };
 		C98223E125D18FEE0024C389 /* Besar-K7MOA.otf in Resources */ = {isa = PBXBuildFile; fileRef = C98223DB25D18FEE0024C389 /* Besar-K7MOA.otf */; };
+		C98EAA06261CA194003BCEF7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C98EAA05261CA194003BCEF7 /* SnapKit */; };
+		C996755B262F356F009B5CA9 /* SearchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996755A262F356F009B5CA9 /* SearchData.swift */; };
 		C998E66A25C254F800FD518C /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = C998E66925C254F800FD518C /* Section.swift */; };
 		C998E68325C2575D00FD518C /* BookList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C998E68225C2575D00FD518C /* BookList.swift */; };
 		C998E68825C2576D00FD518C /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C998E68725C2576D00FD518C /* CustomCell.swift */; };
@@ -91,6 +93,7 @@
 		C98223D025D18CAB0024C389 /* Sweetheat-GOvoG.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sweetheat-GOvoG.ttf"; sourceTree = "<group>"; };
 		C98223DA25D18FED0024C389 /* Besar-2Oj4l.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Besar-2Oj4l.ttf"; sourceTree = "<group>"; };
 		C98223DB25D18FEE0024C389 /* Besar-K7MOA.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Besar-K7MOA.otf"; sourceTree = "<group>"; };
+		C996755A262F356F009B5CA9 /* SearchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchData.swift; sourceTree = "<group>"; };
 		C998E66925C254F800FD518C /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		C998E68225C2575D00FD518C /* BookList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookList.swift; sourceTree = "<group>"; };
 		C998E68725C2576D00FD518C /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
@@ -113,6 +116,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6044B744844B84A4B5519DEF /* Pods_BookReviewApp.framework in Frameworks */,
+				C98EAA06261CA194003BCEF7 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,6 +222,7 @@
 				C998E6DF25C40CAF00FD518C /* Cell */,
 				C998E66925C254F800FD518C /* Section.swift */,
 				C998E68225C2575D00FD518C /* BookList.swift */,
+				C996755A262F356F009B5CA9 /* SearchData.swift */,
 				C998E6AA25C2A61F00FD518C /* data.json */,
 				C9C7E43F260F72920087E90F /* test.json */,
 				C9B72D58260F151D00334E5E /* FirebaseDB.swift */,
@@ -282,6 +287,7 @@
 			);
 			name = BookReviewApp;
 			packageProductDependencies = (
+				C98EAA05261CA194003BCEF7 /* SnapKit */,
 			);
 			productName = BookReviewApp;
 			productReference = C9737FEA25823CA600214652 /* BookReviewApp.app */;
@@ -358,6 +364,7 @@
 			);
 			mainGroup = C9737FE125823CA500214652;
 			packageReferences = (
+				C98EAA04261CA194003BCEF7 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = C9737FEB25823CA600214652 /* Products */;
 			projectDirPath = "";
@@ -524,6 +531,7 @@
 				C998E74525C533AD00FD518C /* SearchViewController.swift in Sources */,
 				C998E6C125C2EE5D00FD518C /* HeaderCollectionReusableView.swift in Sources */,
 				C98223B125D108DE0024C389 /* HeartViewController.swift in Sources */,
+				C996755B262F356F009B5CA9 /* SearchData.swift in Sources */,
 				C9737FF225823CA600214652 /* ViewController.swift in Sources */,
 				C9737FEE25823CA600214652 /* AppDelegate.swift in Sources */,
 				C998E66A25C254F800FD518C /* Section.swift in Sources */,
@@ -867,6 +875,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C98EAA04261CA194003BCEF7 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C98EAA05261CA194003BCEF7 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C98EAA04261CA194003BCEF7 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C9737FE225823CA500214652 /* Project object */;
 }

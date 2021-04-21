@@ -7,7 +7,7 @@
 
 import UIKit
 import Firebase
-
+import SnapKit
 
 // present modal로
 class AddBookViewController: UIViewController, UITextFieldDelegate {
@@ -216,51 +216,57 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         titleInput.tag = 1
         authorInput.tag = 2
         dateInput.tag = 3
-        
-        let subviewList = [closeButton, doneButton, imgAddButton,titleText,titleInput,authorText,authorInput,dateText,dateInput]
-        
-        for subview in subviewList {
-            view.addSubview(subview)
-            subview.translatesAutoresizingMaskIntoConstraints = false
+
+        closeButton.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(20)
+            $0.left.equalToSuperview().offset(15)
         }
-
-                
-        NSLayoutConstraint.activate([
-            
-            closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            closeButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
-            
-            doneButton.topAnchor.constraint(equalTo: closeButton.topAnchor),
-            doneButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
-            
-            imgAddButton.topAnchor.constraint(equalTo: closeButton.topAnchor, constant: 100),
-            imgAddButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-       
-            titleText.topAnchor.constraint(equalTo: imgAddButton.bottomAnchor, constant: 140),
-            titleText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            titleText.heightAnchor.constraint(equalToConstant: 50),
-            
-            titleInput.topAnchor.constraint(equalTo: titleText.bottomAnchor, constant: 5),
-            titleInput.leadingAnchor.constraint(equalTo: titleText.leadingAnchor),
-            titleInput.widthAnchor.constraint(equalToConstant: 300),
-            
-            authorText.topAnchor.constraint(equalTo: titleInput.bottomAnchor, constant: 20),
-            authorText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            authorText.heightAnchor.constraint(equalToConstant: 50),
-            
-            authorInput.topAnchor.constraint(equalTo: authorText.bottomAnchor, constant: 5),
-            authorInput.leadingAnchor.constraint(equalTo: authorText.leadingAnchor),
-            authorInput.widthAnchor.constraint(equalToConstant: 300),
-            
-            dateText.topAnchor.constraint(equalTo: authorInput.bottomAnchor, constant: 20),
-            dateText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-            dateText.heightAnchor.constraint(equalToConstant: 50),
-            
-            dateInput.topAnchor.constraint(equalTo: dateText.bottomAnchor, constant: 5),
-            dateInput.leadingAnchor.constraint(equalTo: dateText.leadingAnchor),
-            dateInput.widthAnchor.constraint(equalToConstant: 300),
-
-        ])
+        
+        doneButton.snp.makeConstraints {
+            $0.top.equalTo(closeButton.snp.top)
+            $0.right.equalToSuperview().offset(-15)
+        }
+        
+        imgAddButton.snp.makeConstraints {
+            $0.top.equalTo(closeButton.snp.bottom).offset(100)
+            $0.centerX.equalToSuperview()
+        }
+        
+        titleText.snp.makeConstraints {
+            $0.top.equalTo(imgAddButton.snp.bottom).offset(140)
+            $0.left.equalToSuperview().inset(30)
+            $0.height.equalTo(50)
+        }
+        
+        titleInput.snp.makeConstraints {
+            $0.top.equalTo(titleText.snp.bottom).offset(5)
+            $0.left.equalTo(titleText.snp.left)
+            $0.width.equalTo(300)
+        }
+        
+        authorText.snp.makeConstraints {
+            $0.top.equalTo(titleInput.snp.bottom).offset(20)
+            $0.left.equalTo(titleText.snp.left)
+            $0.height.equalTo(50)
+        }
+        
+        authorInput.snp.makeConstraints {
+            $0.top.equalTo(authorText.snp.bottom).offset(5)
+            $0.left.equalTo(authorText.snp.left)
+            $0.width.equalTo(300)
+        }
+        
+        dateText.snp.makeConstraints {
+            $0.top.equalTo(authorInput.snp.bottom).offset(20)
+            $0.left.equalTo(authorInput.snp.left)
+            $0.height.equalTo(50)
+        }
+        
+        dateInput.snp.makeConstraints {
+            $0.top.equalTo(dateText.snp.bottom).offset(5)
+            $0.left.equalTo(dateText.snp.left)
+            $0.width.equalTo(300)
+        }
     }
     
     

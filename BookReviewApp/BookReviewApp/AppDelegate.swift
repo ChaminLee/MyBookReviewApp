@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
@@ -21,9 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.backgroundColor = UIColor.black
         window?.makeKeyAndVisible()
-        window?.rootViewController = TabBarViewController()
-        
-        
+        window?.rootViewController = TabBarViewController()        
         return true
     }
     

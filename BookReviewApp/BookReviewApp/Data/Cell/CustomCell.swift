@@ -20,7 +20,10 @@ class CustomCell : UICollectionViewCell, UICollectionViewDelegate, UICollectionV
             self.sectionTitleLabel.text = section.title
             self.section?.bookList.forEach({ (item) in
                  let booklist = BookList(dictionary: item as! [String : Any])
-                 self.booklists.append(booklist)
+                if !self.booklists.contains(booklist) {
+                    self.booklists.append(booklist)
+                }
+                 
             })
             
             self.collectionView.reloadData()
@@ -52,6 +55,7 @@ class CustomCell : UICollectionViewCell, UICollectionViewDelegate, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! SubCustomCell
+//        cell.parentViewController = ViewController()
         
         cell.booklist = booklists[indexPath.item]
         
@@ -69,13 +73,19 @@ class CustomCell : UICollectionViewCell, UICollectionViewDelegate, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+
         print("해당 아이템은 \(indexPath.item)번째")
+        print("제목은 \(booklists[indexPath.item].title)")
+        // Segue 자리
+        let nextVC = DetailViewController()
+        nextVC.name = booklists[indexPath.item].title
         
+        nextVC.modalPresentationStyle = .fullScreen
+        self.window?.rootViewController?.present(nextVC, animated: true, completion: nil)
         
-        // Segue 자리 
-                
     }
+    
+    
     
     // button action 관련
     
@@ -123,6 +133,3 @@ class CustomCell : UICollectionViewCell, UICollectionViewDelegate, UICollectionV
     
     
 }
-
-
-

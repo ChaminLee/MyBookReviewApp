@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BookList {
+struct BookList: Equatable {
     var title: String
     var author: String
     var image: String
