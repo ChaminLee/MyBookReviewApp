@@ -12,7 +12,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     let identifier: String = "cellID"
     
-    let headerColor = UIColor(hexString: "#117893")
+    let headerColor = UIColor(hexString: "4ec5a5")
     let navAppearance = UINavigationBarAppearance()
     
     ////// 재 정비

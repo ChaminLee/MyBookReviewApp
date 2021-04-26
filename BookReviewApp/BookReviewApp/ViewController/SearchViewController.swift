@@ -8,8 +8,17 @@
 import UIKit
 import SnapKit
 
-class SearchViewController: UIViewController {
-
+class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    
+    private let myTableView: UITableView = {
+        let tb = UITableView()
+        tb.register(SearchCell.self, forCellReuseIdentifier: SearchCell.searchIdentifier)
+        return tb
+    }()
+    var books : [SearchResult] = []
+        
+    let identifier: String = "cellID"
     let jsonDecoder: JSONDecoder = JSONDecoder()
     let searchBar = UISearchBar()
     
@@ -19,6 +28,7 @@ class SearchViewController: UIViewController {
         addTopTitle()
         config()
         setSearchBar()
+        setTableView()
         initializeHideKeyboard()
     }
     
@@ -26,7 +36,50 @@ class SearchViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        myTableView.snp.makeConstraints {
+            $0.top.left.right.bottom.equalToSuperview()
+            
+        }
     }
+    
+    func setTableView() {
+        self.view.addSubview(myTableView)
+        
+        myTableView.dataSource = self
+        myTableView.delegate = self
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: SearchCell.searchIdentifier, for: indexPath) as! SearchCell
+        let data = dataManager.shared.searchResult?.items[0]
+        do {
+            let imageURL = URL(string: "\(data?.image)")
+            let imageData = try Data(contentsOf: imageURL!)
+            let posterImage = UIImage(data: imageData)
+            cell.searchTitle.text = data?.title
+            cell.searchAuthor.text = data?.author
+            cell.searchBookImage.image = posterImage
+        } catch {
+
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("clicked: \(indexPath.row)")
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(200.0)
+    }
+    
+    
+    
     
     let searchBookImage : UIImageView = {
         let img = UIImageView()
@@ -34,9 +87,10 @@ class SearchViewController: UIViewController {
         return img
     }()
     
+    
     let searchTitle : UILabel = {
         let lb = UILabel()
-//        lb.text = "책 제목"
+        lb.text = "책 제목"
         lb.font = UIFont(name: "Helvetica-Bold", size: 20)
         lb.textColor = CustomColor().textColor
         
@@ -45,7 +99,7 @@ class SearchViewController: UIViewController {
     
     let searchAuthor : UILabel = {
         let lb = UILabel()
-//        lb.text = "저자"
+        lb.text = "저자"
         lb.font = UIFont(name: "Helvetica-Bold", size: 10)
         lb.textColor = CustomColor().textColor
         
@@ -67,7 +121,7 @@ class SearchViewController: UIViewController {
         view.addSubview(errorMessage)
         
         searchBookImage.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(200)
+            $0.top.equalToSuperview().offset(10)
             $0.left.equalToSuperview().offset(20)
             $0.height.equalTo(150)
             $0.width.equalTo(75)
@@ -104,9 +158,11 @@ extension SearchViewController {
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: CustomColor().textColor]
         
         self.navigationController?.navigationBar.topItem?.title = label.text
-//        self.navigationController?.navigationBar.barTintColor = CustomColor().headerColor
+        self.navigationController?.navigationBar.barTintColor = CustomColor().headerColor
         navigationController?.navigationBar.tintColor = .black
-        
+        self.navigationController?.navigationBar.backgroundColor = .white
+        self.navigationController?.setStatusBar(backgroundColor: .white)
+
         
     }
     
@@ -132,9 +188,12 @@ extension SearchViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         print("editing..")
         OperationQueue.main.addOperation {
-            self.searchBookImage.image = nil
-            self.searchTitle.text = nil
-            self.searchAuthor.text = nil
+//            self.searchBookImage.image = nil
+//            self.searchTitle.text = nil
+//            self.searchAuthor.text = nil
+            SearchCell().searchBookImage.image = nil
+            SearchCell().searchTitle.text = nil
+            SearchCell().searchAuthor.text = nil
             self.errorMessage.text = nil
         }
     }
@@ -178,16 +237,25 @@ extension SearchViewController {
     func urlTaskDone() {
         // 데이터가 있을 때
         if (dataManager.shared.searchResult?.items.count)! > 0 {
+//            guard let itemcnt = dataManager.shared.searchResult?.items.count else { return }
             guard let item = dataManager.shared.searchResult?.items[0] else { return }
+            
                 do {
                     let imageURL = URL(string: "\(item.image)")
                     let imageData = try Data(contentsOf: imageURL!)
                     let posterImage = UIImage(data: imageData)
                     OperationQueue.main.addOperation {
-                        self.searchBookImage.image = posterImage
-                        self.searchTitle.text = item.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
-                        self.searchAuthor.text = item.author
+//                        self.searchBookImage.image = posterImage
+//                        self.searchTitle.text = item.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+//                        self.searchAuthor.text = item.author
+//                        self.errorMessage.text = nil
+                        
+                        SearchCell().searchBookImage.image = posterImage
+                        SearchCell().searchTitle.text = item.title.replacingOccurrences(of: "<b>", with: "")
+                            .replacingOccurrences(of: "</b>", with: "")
+                        SearchCell().searchAuthor.text = item.author
                         self.errorMessage.text = nil
+                         
                     }
                 } catch {
 
@@ -195,9 +263,12 @@ extension SearchViewController {
             
         } else {
             OperationQueue.main.addOperation {
-                self.searchBookImage.image = nil
-                self.searchTitle.text = nil 
-                self.searchAuthor.text = nil
+//                self.searchBookImage.image = nil
+//                self.searchTitle.text = nil
+//                self.searchAuthor.text = nil
+                SearchCell().searchBookImage.image = nil
+                SearchCell().searchTitle.text = nil
+                SearchCell().searchAuthor.text = nil
                 self.errorMessage.text = "'\(self.searchBar.text!)'을(를) 찾을 수 없습니다."
             }
             
@@ -221,7 +292,6 @@ extension SearchViewController {
         requestURL.httpMethod = "GET"
         
         requestURL.addValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-//        requestURL.addValue("plain/text", forHTTPHeaderField: "Content-Type")
         requestURL.addValue(clientID, forHTTPHeaderField: "X-Naver-Client-Id")
         requestURL.addValue(clientPW, forHTTPHeaderField: "X-Naver-Client-Secret")
 
@@ -235,8 +305,6 @@ extension SearchViewController {
                 let searchInfo: SearchResult = try self.jsonDecoder.decode(SearchResult.self, from: data)
                 dataManager.shared.searchResult = searchInfo
                 self.urlTaskDone()
-                print("또 안돼")
-                
             } catch {
                 print(error.localizedDescription)
             }
@@ -247,6 +315,8 @@ extension SearchViewController {
     
     
 }
+
+
 
 
 extension SearchViewController: UITextFieldDelegate {

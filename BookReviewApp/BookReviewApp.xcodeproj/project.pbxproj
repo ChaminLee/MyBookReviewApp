@@ -31,6 +31,7 @@
 		C98223E025D18FEE0024C389 /* Besar-K7MOA.otf in Resources */ = {isa = PBXBuildFile; fileRef = C98223DB25D18FEE0024C389 /* Besar-K7MOA.otf */; };
 		C98223E125D18FEE0024C389 /* Besar-K7MOA.otf in Resources */ = {isa = PBXBuildFile; fileRef = C98223DB25D18FEE0024C389 /* Besar-K7MOA.otf */; };
 		C98EAA06261CA194003BCEF7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C98EAA05261CA194003BCEF7 /* SnapKit */; };
+		C99351A82631DFAF0009B725 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99351A72631DFAF0009B725 /* SearchCell.swift */; };
 		C996755B262F356F009B5CA9 /* SearchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996755A262F356F009B5CA9 /* SearchData.swift */; };
 		C998E66A25C254F800FD518C /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = C998E66925C254F800FD518C /* Section.swift */; };
 		C998E68325C2575D00FD518C /* BookList.swift in Sources */ = {isa = PBXBuildFile; fileRef = C998E68225C2575D00FD518C /* BookList.swift */; };
@@ -93,6 +94,7 @@
 		C98223D025D18CAB0024C389 /* Sweetheat-GOvoG.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sweetheat-GOvoG.ttf"; sourceTree = "<group>"; };
 		C98223DA25D18FED0024C389 /* Besar-2Oj4l.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Besar-2Oj4l.ttf"; sourceTree = "<group>"; };
 		C98223DB25D18FEE0024C389 /* Besar-K7MOA.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Besar-K7MOA.otf"; sourceTree = "<group>"; };
+		C99351A72631DFAF0009B725 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		C996755A262F356F009B5CA9 /* SearchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchData.swift; sourceTree = "<group>"; };
 		C998E66925C254F800FD518C /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		C998E68225C2575D00FD518C /* BookList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookList.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				C998E68725C2576D00FD518C /* CustomCell.swift */,
 				C998E68C25C257B600FD518C /* SubCustomCell.swift */,
 				C998E6C025C2EE5D00FD518C /* HeaderCollectionReusableView.swift */,
+				C99351A72631DFAF0009B725 /* SearchCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				C998E66A25C254F800FD518C /* Section.swift in Sources */,
 				C998E6E725C4554F00FD518C /* TabBarViewController.swift in Sources */,
 				C998E68325C2575D00FD518C /* BookList.swift in Sources */,
+				C99351A82631DFAF0009B725 /* SearchCell.swift in Sources */,
 				C998E68825C2576D00FD518C /* CustomCell.swift in Sources */,
 				C998E68D25C257B600FD518C /* SubCustomCell.swift in Sources */,
 				C97F74E625F8FDF100F87F9D /* DummyViewController.swift in Sources */,

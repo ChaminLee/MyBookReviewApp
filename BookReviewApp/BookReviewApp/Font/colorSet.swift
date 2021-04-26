@@ -11,5 +11,5 @@ import UIKit
 struct CustomColor {
     var defaultBackgroundColor: UIColor = .white
     var textColor: UIColor = .black
-    var headerColor: UIColor = UIColor(hexString: "#117893")
+    var headerColor: UIColor = UIColor(hexString: "4ec5a5")
 }
