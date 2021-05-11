@@ -9,72 +9,21 @@
 
 import UIKit
 
-class UserInfoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class UserInfoViewController: UIViewController{
 
-    private let myTableView: UITableView = {
-        let tb = UITableView()
-        tb.register(SearchCell.self, forCellReuseIdentifier: SearchCell.searchIdentifier)
-        return tb
-    }()
-    let fieldView = UIView()
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = CustomColor().defaultBackgroundColor
         addTopTitle()
-        setTableView()
     }
     
     override func didReceiveMemoryWarning() {
         super .didReceiveMemoryWarning()
     }
 
-    
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        myTableView.snp.makeConstraints {
-            $0.top.left.right.bottom.equalToSuperview()
-            
-        }
-    }
-    
-    func setTableView() {
-        self.view.addSubview(myTableView)
-        
-        myTableView.register(SearchCell.self, forCellReuseIdentifier: SearchCell.searchIdentifier)
-        myTableView.dataSource = self
-        
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: SearchCell.searchIdentifier, for: indexPath) as! SearchCell
-        let data = dataManager.shared.searchResult?.items[indexPath.row]
-        do {
-            let imageURL = URL(string: "\(data?.image)")
-            let imageData = try Data(contentsOf: imageURL!)
-            let posterImage = UIImage(data: imageData)
-            cell.searchTitle.text = data?.title
-            cell.searchAuthor.text = data?.author
-            cell.searchBookImage.image = posterImage
-        } catch {
-            
-        }
-        
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("clicked: \(indexPath.row)")
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(200.0)
-    }
+
     
 
 }

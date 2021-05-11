@@ -28,7 +28,7 @@ class SearchCell: UITableViewCell {
         lb.text = "책 제목"
         lb.font = UIFont(name: "Helvetica-Bold", size: 15)
         lb.textColor = CustomColor().textColor
-        lb.numberOfLines = 0
+        lb.numberOfLines = 3
         return lb
     }()
     
@@ -61,16 +61,16 @@ class SearchCell: UITableViewCell {
         searchTitle.snp.makeConstraints {
             $0.top.equalTo(searchBookImage.snp.top).offset(50)
             $0.left.equalTo(searchBookImage.snp.right).offset(20)
-            $0.right.equalToSuperview().offset(20)
-            $0.width.equalTo(200)
-            $0.height.equalTo(50)
+            $0.right.equalToSuperview().offset(-30)
+//            $0.width.equalTo(220)
+            $0.height.equalTo(60)
         }
         
         searchAuthor.snp.makeConstraints {
             $0.top.equalTo(searchTitle.snp.bottom).offset(10)
             $0.left.equalTo(searchTitle)
-            $0.right.equalToSuperview().offset(20)
-            $0.width.equalTo(searchTitle)
+            $0.right.equalToSuperview().offset(-30)
+//            $0.width.equalTo(searchTitle)
             $0.height.equalTo(20)
         }
     }

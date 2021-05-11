@@ -26,6 +26,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = CustomColor().defaultBackgroundColor
+        
         addTopTitle()
 //        config()
         setSearchBar()
@@ -45,6 +46,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func setTableView() {
         self.view.addSubview(myTableView)
         
+        self.myTableView.backgroundColor = CustomColor().defaultBackgroundColor
 //        self.myTableView.separatorColor = .clear
         self.myTableView.tableFooterView = UIView()
         myTableView.dataSource = self
@@ -89,7 +91,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let lb = UILabel()
         lb.font = UIFont(name: "Helvetica-Bold", size: 20)
         lb.textColor = CustomColor().textColor
-        
+        lb.text = "찾으시는 결과가 없어요!"
         return lb
     }()
     
@@ -100,7 +102,7 @@ extension SearchViewController {
         let label : UILabel = {
             let lb = UILabel()
             lb.text = "검색"
-            lb.textColor = UIColor.white
+            lb.textColor = CustomColor().textColor
             
             return lb
         }()
@@ -108,11 +110,13 @@ extension SearchViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: CustomColor().textColor]
         
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         self.navigationController?.navigationBar.topItem?.title = label.text
-//        self.navigationController?.navigationBar.barTintColor = CustomColor().headerColor
+        self.navigationController?.navigationBar.barTintColor = CustomColor().defaultBackgroundColor
         navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.setStatusBar(backgroundColor: .white)
+        
 
         
     }
@@ -123,6 +127,9 @@ extension SearchViewController {
         showSearchBarButton(shouldShow: true)
         searchBar.placeholder = "책 제목을 입력해주세요."
         searchBar.tintColor = .black
+        var sb = searchBar.value(forKey: "searchField") as? UITextField
+        sb?.textColor = CustomColor().textColor
+        
     }
     
     @objc func handleShowSearchBar() {
@@ -145,6 +152,7 @@ extension SearchViewController: UISearchBarDelegate {
 
         }
     }
+    
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         print("end")
@@ -184,15 +192,26 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController {
     func urlTaskDone() {
         // 데이터가 있을 때
-        guard let items = dataManager.shared.searchResult?.items else { return }
-        DispatchQueue.main.async {
-//            self.myTableView.separatorColor = .black
-            self.searchRes.removeAll()
-            self.searchRes.append(contentsOf: items)
-            self.myTableView.reloadData()
-            SearchCell().searchTitle.text = items[0].title
-            print("디스패치이잉")
+        if let items = dataManager.shared.searchResult?.items {
+            DispatchQueue.main.async {
+                self.errorMessage.text = nil
+    //            self.myTableView.separatorColor = .black
+                self.searchRes.removeAll()
+                self.searchRes.append(contentsOf: items)
+                self.myTableView.reloadData()
+                print("디스패치이잉")
+            }
+        } else {
+            self.myTableView.addSubview(self.errorMessage)
+            self.errorMessage.text = "찾으시는 결과가 없어요!"
+            
+            self.errorMessage.snp.makeConstraints {
+                $0.top.equalToSuperview().offset(30)
+                $0.centerX.equalToSuperview()
+                $0.height.equalTo(50)
+            }
         }
+        
 
          
     }
