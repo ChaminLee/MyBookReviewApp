@@ -18,21 +18,22 @@ class dataManager {
 }
 
 struct SearchResult: Codable {
+    var lastBuildDate: String
+    var total: Int
+    var start: Int
+    var display: Int
+    var items: [BookInfo]
+    
     struct BookInfo: Codable {
-        let title: String
-        let link: String
-        let image: String
-        let author: String
-        let price: String
-        let discount: String
-        let publisher: String
-        let pubdate: String
-        let isbn: String
-        let description: String
+        var title: String
+        var link: String
+        var image: String
+        var author: String
+        var price: String
+        var discount: String
+        var publisher: String
+        var pubdate: String
+        var isbn: String
+        var description: String
     }
-    let lastBuildDate: String
-    let total: Int
-    let start: Int
-    let display: Int
-    let items: [BookInfo]
 }

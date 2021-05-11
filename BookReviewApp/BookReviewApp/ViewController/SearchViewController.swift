@@ -10,14 +10,15 @@ import SnapKit
 
 class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    var searchRes = [SearchResult.BookInfo]()
     
     private let myTableView: UITableView = {
         let tb = UITableView()
         tb.register(SearchCell.self, forCellReuseIdentifier: SearchCell.searchIdentifier)
         return tb
     }()
-    var books : [SearchResult] = []
-        
+    
+    
     let identifier: String = "cellID"
     let jsonDecoder: JSONDecoder = JSONDecoder()
     let searchBar = UISearchBar()
@@ -26,85 +27,63 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad()
         view.backgroundColor = CustomColor().defaultBackgroundColor
         addTopTitle()
-        config()
+//        config()
         setSearchBar()
         setTableView()
         initializeHideKeyboard()
     }
     
-
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         myTableView.snp.makeConstraints {
-            $0.top.left.right.bottom.equalToSuperview()
-            
+            $0.top.equalToSuperview().offset(50)
+            $0.left.right.bottom.equalToSuperview()
         }
     }
     
     func setTableView() {
         self.view.addSubview(myTableView)
         
+//        self.myTableView.separatorColor = .clear
+        self.myTableView.tableFooterView = UIView()
         myTableView.dataSource = self
         myTableView.delegate = self
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.searchRes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchCell.searchIdentifier, for: indexPath) as! SearchCell
-        let data = dataManager.shared.searchResult?.items[0]
+        let item = self.searchRes[indexPath.row]
         do {
-            let imageURL = URL(string: "\(data?.image)")
+            let imageURL = URL(string: "\(item.image)")
             let imageData = try Data(contentsOf: imageURL!)
-            let posterImage = UIImage(data: imageData)
-            cell.searchTitle.text = data?.title
-            cell.searchAuthor.text = data?.author
-            cell.searchBookImage.image = posterImage
+            let realImg = UIImage(data: imageData)
+            cell.searchBookImage.image = realImg
         } catch {
 
         }
         
+        cell.searchTitle.text = item.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+        cell.searchAuthor.text = item.author.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+
+//        tableView.reloadData()
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("clicked: \(indexPath.row)")
     }
+
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(200.0)
     }
     
     
-    
-    
-    let searchBookImage : UIImageView = {
-        let img = UIImageView()
-       
-        return img
-    }()
-    
-    
-    let searchTitle : UILabel = {
-        let lb = UILabel()
-        lb.text = "책 제목"
-        lb.font = UIFont(name: "Helvetica-Bold", size: 20)
-        lb.textColor = CustomColor().textColor
-        
-        return lb
-    }()
-    
-    let searchAuthor : UILabel = {
-        let lb = UILabel()
-        lb.text = "저자"
-        lb.font = UIFont(name: "Helvetica-Bold", size: 10)
-        lb.textColor = CustomColor().textColor
-        
-        return lb
-    }()
     
     let errorMessage : UILabel = {
         let lb = UILabel()
@@ -114,34 +93,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return lb
     }()
     
-    func config() {
-        view.addSubview(searchBookImage)
-        view.addSubview(searchTitle)
-        view.addSubview(searchAuthor)
-        view.addSubview(errorMessage)
-        
-        searchBookImage.snp.makeConstraints{
-            $0.top.equalToSuperview().offset(10)
-            $0.left.equalToSuperview().offset(20)
-            $0.height.equalTo(150)
-            $0.width.equalTo(75)
-        }
-        
-        searchTitle.snp.makeConstraints {
-            $0.top.equalTo(searchBookImage)
-            $0.left.equalTo(searchBookImage.snp.right).offset(30)
-        }
-        
-        searchAuthor.snp.makeConstraints {
-            $0.top.equalTo(searchTitle).offset(30)
-            $0.left.equalTo(searchTitle)
-        }
-        
-        errorMessage.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().offset(200)
-        }
-    }
 }
 
 extension SearchViewController {
@@ -158,7 +109,7 @@ extension SearchViewController {
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: CustomColor().textColor]
         
         self.navigationController?.navigationBar.topItem?.title = label.text
-        self.navigationController?.navigationBar.barTintColor = CustomColor().headerColor
+//        self.navigationController?.navigationBar.barTintColor = CustomColor().headerColor
         navigationController?.navigationBar.tintColor = .black
         self.navigationController?.navigationBar.backgroundColor = .white
         self.navigationController?.setStatusBar(backgroundColor: .white)
@@ -187,14 +138,11 @@ extension SearchViewController {
 extension SearchViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         print("editing..")
-        OperationQueue.main.addOperation {
+        DispatchQueue.main.async {
 //            self.searchBookImage.image = nil
 //            self.searchTitle.text = nil
 //            self.searchAuthor.text = nil
-            SearchCell().searchBookImage.image = nil
-            SearchCell().searchTitle.text = nil
-            SearchCell().searchAuthor.text = nil
-            self.errorMessage.text = nil
+
         }
     }
     
@@ -236,44 +184,16 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController {
     func urlTaskDone() {
         // 데이터가 있을 때
-        if (dataManager.shared.searchResult?.items.count)! > 0 {
-//            guard let itemcnt = dataManager.shared.searchResult?.items.count else { return }
-            guard let item = dataManager.shared.searchResult?.items[0] else { return }
-            
-                do {
-                    let imageURL = URL(string: "\(item.image)")
-                    let imageData = try Data(contentsOf: imageURL!)
-                    let posterImage = UIImage(data: imageData)
-                    OperationQueue.main.addOperation {
-//                        self.searchBookImage.image = posterImage
-//                        self.searchTitle.text = item.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
-//                        self.searchAuthor.text = item.author
-//                        self.errorMessage.text = nil
-                        
-                        SearchCell().searchBookImage.image = posterImage
-                        SearchCell().searchTitle.text = item.title.replacingOccurrences(of: "<b>", with: "")
-                            .replacingOccurrences(of: "</b>", with: "")
-                        SearchCell().searchAuthor.text = item.author
-                        self.errorMessage.text = nil
-                         
-                    }
-                } catch {
-
-                }
-            
-        } else {
-            OperationQueue.main.addOperation {
-//                self.searchBookImage.image = nil
-//                self.searchTitle.text = nil
-//                self.searchAuthor.text = nil
-                SearchCell().searchBookImage.image = nil
-                SearchCell().searchTitle.text = nil
-                SearchCell().searchAuthor.text = nil
-                self.errorMessage.text = "'\(self.searchBar.text!)'을(를) 찾을 수 없습니다."
-            }
-            
+        guard let items = dataManager.shared.searchResult?.items else { return }
+        DispatchQueue.main.async {
+//            self.myTableView.separatorColor = .black
+            self.searchRes.removeAll()
+            self.searchRes.append(contentsOf: items)
+            self.myTableView.reloadData()
+            SearchCell().searchTitle.text = items[0].title
+            print("디스패치이잉")
         }
-        
+
          
     }
     
@@ -313,10 +233,7 @@ extension SearchViewController {
         task.resume()
     }
     
-    
 }
-
-
 
 
 extension SearchViewController: UITextFieldDelegate {
