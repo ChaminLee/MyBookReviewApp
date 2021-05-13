@@ -43,6 +43,27 @@
 		C998E6E725C4554F00FD518C /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C998E6E625C4554E00FD518C /* TabBarViewController.swift */; };
 		C998E74525C533AD00FD518C /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C998E74425C533AD00FD518C /* SearchViewController.swift */; };
 		C9B72D59260F151D00334E5E /* FirebaseDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9B72D58260F151D00334E5E /* FirebaseDB.swift */; };
+		C9C03AC8264D6AE6006735FB /* NotoSansKR-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = C9C03AC2264D6AE2006735FB /* NotoSansKR-Black.otf */; };
+		C9C03AC9264D6AE6006735FB /* NotoSansKR-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = C9C03AC2264D6AE2006735FB /* NotoSansKR-Black.otf */; };
+		C9C03ACA264D6AE6006735FB /* NotoSansKR-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = C9C03AC2264D6AE2006735FB /* NotoSansKR-Black.otf */; };
+		C9C03ACB264D6AE6006735FB /* NotoSansKR-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C9C03AC3264D6AE3006735FB /* NotoSansKR-Light.otf */; };
+		C9C03ACC264D6AE6006735FB /* NotoSansKR-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C9C03AC3264D6AE3006735FB /* NotoSansKR-Light.otf */; };
+		C9C03ACD264D6AE6006735FB /* NotoSansKR-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = C9C03AC3264D6AE3006735FB /* NotoSansKR-Light.otf */; };
+		C9C03ACE264D6AE6006735FB /* NotoSansKR-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = C9C03AC4264D6AE3006735FB /* NotoSansKR-Thin.otf */; };
+		C9C03ACF264D6AE6006735FB /* NotoSansKR-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = C9C03AC4264D6AE3006735FB /* NotoSansKR-Thin.otf */; };
+		C9C03AD0264D6AE6006735FB /* NotoSansKR-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = C9C03AC4264D6AE3006735FB /* NotoSansKR-Thin.otf */; };
+		C9C03AD1264D6AE6006735FB /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C9C03AC5264D6AE4006735FB /* NotoSansKR-Bold.otf */; };
+		C9C03AD2264D6AE6006735FB /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C9C03AC5264D6AE4006735FB /* NotoSansKR-Bold.otf */; };
+		C9C03AD3264D6AE6006735FB /* NotoSansKR-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = C9C03AC5264D6AE4006735FB /* NotoSansKR-Bold.otf */; };
+		C9C03AD4264D6AE6006735FB /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C9C03AC6264D6AE5006735FB /* NotoSansKR-Regular.otf */; };
+		C9C03AD5264D6AE6006735FB /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C9C03AC6264D6AE5006735FB /* NotoSansKR-Regular.otf */; };
+		C9C03AD6264D6AE6006735FB /* NotoSansKR-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = C9C03AC6264D6AE5006735FB /* NotoSansKR-Regular.otf */; };
+		C9C03AD7264D6AE6006735FB /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C9C03AC7264D6AE6006735FB /* NotoSansKR-Medium.otf */; };
+		C9C03AD8264D6AE6006735FB /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C9C03AC7264D6AE6006735FB /* NotoSansKR-Medium.otf */; };
+		C9C03AD9264D6AE6006735FB /* NotoSansKR-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = C9C03AC7264D6AE6006735FB /* NotoSansKR-Medium.otf */; };
+		C9C03AE6264D6D02006735FB /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C03AE5264D6D02006735FB /* CustomFont.swift */; };
+		C9C03AE7264D6D02006735FB /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C03AE5264D6D02006735FB /* CustomFont.swift */; };
+		C9C03AE8264D6D02006735FB /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C03AE5264D6D02006735FB /* CustomFont.swift */; };
 		C9C49E1625A6A7860078116F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9C49E1525A6A7860078116F /* GoogleService-Info.plist */; };
 		C9C7E440260F72920087E90F /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = C9C7E43F260F72920087E90F /* test.json */; };
 		DCDE0A2403F28EDDF3980C2B /* Pods_BookReviewApp_BookReviewAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE05FFB0D62F52808B6E91AF /* Pods_BookReviewApp_BookReviewAppUITests.framework */; };
@@ -106,6 +127,13 @@
 		C998E6E625C4554E00FD518C /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		C998E74425C533AD00FD518C /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		C9B72D58260F151D00334E5E /* FirebaseDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDB.swift; sourceTree = "<group>"; };
+		C9C03AC2264D6AE2006735FB /* NotoSansKR-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Black.otf"; sourceTree = "<group>"; };
+		C9C03AC3264D6AE3006735FB /* NotoSansKR-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Light.otf"; sourceTree = "<group>"; };
+		C9C03AC4264D6AE3006735FB /* NotoSansKR-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Thin.otf"; sourceTree = "<group>"; };
+		C9C03AC5264D6AE4006735FB /* NotoSansKR-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Bold.otf"; sourceTree = "<group>"; };
+		C9C03AC6264D6AE5006735FB /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
+		C9C03AC7264D6AE6006735FB /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
+		C9C03AE5264D6D02006735FB /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
 		C9C49E1525A6A7860078116F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C9C7E43F260F72920087E90F /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		D6DC5A6CEA72C5CE8A6079EB /* Pods-BookReviewAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookReviewAppTests.debug.xcconfig"; path = "Target Support Files/Pods-BookReviewAppTests/Pods-BookReviewAppTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -176,7 +204,7 @@
 		C9737FEC25823CA600214652 /* BookReviewApp */ = {
 			isa = PBXGroup;
 			children = (
-				C98223CF25D18C990024C389 /* Font */,
+				C98223CF25D18C990024C389 /* Design */,
 				C9737FED25823CA600214652 /* AppDelegate.swift */,
 				C998E6DA25C401D200FD518C /* ViewController */,
 				C998E66E25C255CA00FD518C /* Data */,
@@ -207,15 +235,13 @@
 			path = BookReviewAppUITests;
 			sourceTree = "<group>";
 		};
-		C98223CF25D18C990024C389 /* Font */ = {
+		C98223CF25D18C990024C389 /* Design */ = {
 			isa = PBXGroup;
 			children = (
-				C98223D025D18CAB0024C389 /* Sweetheat-GOvoG.ttf */,
-				C98223DA25D18FED0024C389 /* Besar-2Oj4l.ttf */,
-				C98223DB25D18FEE0024C389 /* Besar-K7MOA.otf */,
-				C97F74DD25F7B45400F87F9D /* colorSet.swift */,
+				C9C03AE4264D6CC4006735FB /* Colors */,
+				C9C03AE3264D6CB1006735FB /* Fonts */,
 			);
-			path = Font;
+			path = Design;
 			sourceTree = "<group>";
 		};
 		C998E66E25C255CA00FD518C /* Data */ = {
@@ -256,6 +282,31 @@
 				C99351A72631DFAF0009B725 /* SearchCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		C9C03AE3264D6CB1006735FB /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C98223D025D18CAB0024C389 /* Sweetheat-GOvoG.ttf */,
+				C98223DA25D18FED0024C389 /* Besar-2Oj4l.ttf */,
+				C98223DB25D18FEE0024C389 /* Besar-K7MOA.otf */,
+				C9C03AC2264D6AE2006735FB /* NotoSansKR-Black.otf */,
+				C9C03AC5264D6AE4006735FB /* NotoSansKR-Bold.otf */,
+				C9C03AC3264D6AE3006735FB /* NotoSansKR-Light.otf */,
+				C9C03AC7264D6AE6006735FB /* NotoSansKR-Medium.otf */,
+				C9C03AC6264D6AE5006735FB /* NotoSansKR-Regular.otf */,
+				C9C03AC4264D6AE3006735FB /* NotoSansKR-Thin.otf */,
+				C9C03AE5264D6D02006735FB /* CustomFont.swift */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		C9C03AE4264D6CC4006735FB /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				C97F74DD25F7B45400F87F9D /* colorSet.swift */,
+			);
+			path = Colors;
 			sourceTree = "<group>";
 		};
 		F4AA02B2C13D0C79B7A34A96 /* Pods */ = {
@@ -385,13 +436,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9C03ACE264D6AE6006735FB /* NotoSansKR-Thin.otf in Resources */,
 				C9737FFA25823CB000214652 /* LaunchScreen.storyboard in Resources */,
+				C9C03AD1264D6AE6006735FB /* NotoSansKR-Bold.otf in Resources */,
 				C998E6AB25C2A61F00FD518C /* data.json in Resources */,
 				C98223DC25D18FEE0024C389 /* Besar-2Oj4l.ttf in Resources */,
+				C9C03AC8264D6AE6006735FB /* NotoSansKR-Black.otf in Resources */,
+				C9C03AD4264D6AE6006735FB /* NotoSansKR-Regular.otf in Resources */,
 				C9C49E1625A6A7860078116F /* GoogleService-Info.plist in Resources */,
 				C9737FF725823CB000214652 /* Assets.xcassets in Resources */,
+				C9C03ACB264D6AE6006735FB /* NotoSansKR-Light.otf in Resources */,
 				C98223D125D18CAB0024C389 /* Sweetheat-GOvoG.ttf in Resources */,
 				C9737FF525823CA600214652 /* Main.storyboard in Resources */,
+				C9C03AD7264D6AE6006735FB /* NotoSansKR-Medium.otf in Resources */,
 				C98223DF25D18FEE0024C389 /* Besar-K7MOA.otf in Resources */,
 				C9C7E440260F72920087E90F /* test.json in Resources */,
 			);
@@ -401,9 +458,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9C03ACF264D6AE6006735FB /* NotoSansKR-Thin.otf in Resources */,
+				C9C03AD2264D6AE6006735FB /* NotoSansKR-Bold.otf in Resources */,
 				C98223E025D18FEE0024C389 /* Besar-K7MOA.otf in Resources */,
+				C9C03AD8264D6AE6006735FB /* NotoSansKR-Medium.otf in Resources */,
+				C9C03ACC264D6AE6006735FB /* NotoSansKR-Light.otf in Resources */,
 				C98223DD25D18FEE0024C389 /* Besar-2Oj4l.ttf in Resources */,
 				C98223D225D18CAB0024C389 /* Sweetheat-GOvoG.ttf in Resources */,
+				C9C03AD5264D6AE6006735FB /* NotoSansKR-Regular.otf in Resources */,
+				C9C03AC9264D6AE6006735FB /* NotoSansKR-Black.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,9 +474,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9C03AD0264D6AE6006735FB /* NotoSansKR-Thin.otf in Resources */,
+				C9C03AD3264D6AE6006735FB /* NotoSansKR-Bold.otf in Resources */,
 				C98223E125D18FEE0024C389 /* Besar-K7MOA.otf in Resources */,
+				C9C03AD9264D6AE6006735FB /* NotoSansKR-Medium.otf in Resources */,
+				C9C03ACD264D6AE6006735FB /* NotoSansKR-Light.otf in Resources */,
 				C98223DE25D18FEE0024C389 /* Besar-2Oj4l.ttf in Resources */,
 				C98223D325D18CAB0024C389 /* Sweetheat-GOvoG.ttf in Resources */,
+				C9C03AD6264D6AE6006735FB /* NotoSansKR-Regular.otf in Resources */,
+				C9C03ACA264D6AE6006735FB /* NotoSansKR-Black.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -531,6 +600,7 @@
 				C98223A925D106990024C389 /* AddBookViewController.swift in Sources */,
 				C9B72D59260F151D00334E5E /* FirebaseDB.swift in Sources */,
 				C97F74DE25F7B45400F87F9D /* colorSet.swift in Sources */,
+				C9C03AE6264D6D02006735FB /* CustomFont.swift in Sources */,
 				C998E74525C533AD00FD518C /* SearchViewController.swift in Sources */,
 				C998E6C125C2EE5D00FD518C /* HeaderCollectionReusableView.swift in Sources */,
 				C98223B125D108DE0024C389 /* HeartViewController.swift in Sources */,
@@ -553,6 +623,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C973800525823CB100214652 /* BookReviewAppTests.swift in Sources */,
+				C9C03AE7264D6D02006735FB /* CustomFont.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -561,6 +632,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C973801025823CB100214652 /* BookReviewAppUITests.swift in Sources */,
+				C9C03AE8264D6D02006735FB /* CustomFont.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -93,10 +93,8 @@ class CustomCell : UICollectionViewCell, UICollectionViewDelegate, UICollectionV
     
     let sectionTitleLabel : UILabel = {
         let lb = UILabel()
-        lb.textColor = .systemPink
         lb.textColor = CustomColor().textColor
-        lb.font = UIFont.boldSystemFont(ofSize: 20)
-        lb.font = UIFont.boldSystemFont(ofSize: 20)
+        lb.font = CustomFont().title_section
         
         return lb
     }()

@@ -34,6 +34,10 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         initializeHideKeyboard()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        errorMessage.text = "돋보기를 눌러 책을 검색해보세요!"
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -51,9 +55,21 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.myTableView.tableFooterView = UIView()
         myTableView.dataSource = self
         myTableView.delegate = self
+        
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.searchRes.count == 0 {
+            self.myTableView.addSubview(self.errorMessage)
+            self.errorMessage.text = "찾으시는 결과가 없어요!😕"
+            
+            self.errorMessage.snp.makeConstraints {
+                $0.top.equalToSuperview().offset(30)
+                $0.centerX.equalToSuperview()
+                $0.height.equalTo(50)
+            }
+        }
         return self.searchRes.count
     }
     
@@ -68,9 +84,19 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } catch {
 
         }
+        var title = item.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+        var new = [String]()
+        for i in title {
+            if i != "(" {
+                new.append(String(i))
+            } else {
+                break
+            }
+        }
         
-        cell.searchTitle.text = item.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
-        cell.searchAuthor.text = item.author.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+        cell.searchTitle.text = new.joined()
+        cell.searchAuthor.text = "저자 | \(item.author.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: ""))"
+        cell.searchPublisher.text = "출판 | \(item.publisher.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: ""))"
 
 //        tableView.reloadData()
         return cell
@@ -82,14 +108,14 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(200.0)
+        return CGFloat(140.0)
     }
     
     
     
     let errorMessage : UILabel = {
         let lb = UILabel()
-        lb.font = UIFont(name: "Helvetica-Bold", size: 20)
+        lb.font = CustomFont().title_section
         lb.textColor = CustomColor().textColor
         lb.text = "찾으시는 결과가 없어요!"
         return lb
@@ -144,7 +170,7 @@ extension SearchViewController {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        print("editing..")
+        errorMessage.text = "두근두근 어떤 책을 검색할까~"
         DispatchQueue.main.async {
 //            self.searchBookImage.image = nil
 //            self.searchTitle.text = nil
@@ -195,24 +221,12 @@ extension SearchViewController {
         if let items = dataManager.shared.searchResult?.items {
             DispatchQueue.main.async {
                 self.errorMessage.text = nil
-    //            self.myTableView.separatorColor = .black
                 self.searchRes.removeAll()
                 self.searchRes.append(contentsOf: items)
                 self.myTableView.reloadData()
                 print("디스패치이잉")
             }
-        } else {
-            self.myTableView.addSubview(self.errorMessage)
-            self.errorMessage.text = "찾으시는 결과가 없어요!"
-            
-            self.errorMessage.snp.makeConstraints {
-                $0.top.equalToSuperview().offset(30)
-                $0.centerX.equalToSuperview()
-                $0.height.equalTo(50)
-            }
         }
-        
-
          
     }
     
@@ -237,7 +251,7 @@ extension SearchViewController {
         
         let task = URLSession.shared.dataTask(with: requestURL) { data, response, error in
             guard error == nil else { print(error!); return }
-            guard let data = data else { print("데이터를 못바"); return }
+            guard let data = data else { print("데이터를 못봐"); return }
             print("data :\(data)")
  
             do {
