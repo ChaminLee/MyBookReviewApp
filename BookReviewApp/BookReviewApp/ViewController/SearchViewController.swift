@@ -36,7 +36,14 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        errorMessage.text = "돋보기를 눌러 책을 검색해보세요!"
+        
+        // 바로 띄우기
+        handleShowSearchBar()
+//        if self.searchRes.count == 0 {
+//            errorMessage.text = "돋보기를 눌러 책을 검색해보세요!"
+//        }
+        
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -62,12 +69,12 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.searchRes.count == 0 {
             self.myTableView.addSubview(self.errorMessage)
-            self.errorMessage.text = "찾으시는 결과가 없어요!😕"
+            self.errorMessage.text = "찾으시는 결과가 없어요!😕 \n 직접 추가하려면 '기록하기' 이동"
             
             self.errorMessage.snp.makeConstraints {
                 $0.top.equalToSuperview().offset(30)
                 $0.centerX.equalToSuperview()
-                $0.height.equalTo(50)
+                $0.height.equalTo(100)
             }
         }
         return self.searchRes.count
@@ -117,7 +124,9 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let lb = UILabel()
         lb.font = CustomFont().title_section
         lb.textColor = CustomColor().textColor
-        lb.text = "찾으시는 결과가 없어요!"
+//        lb.text = "찾으시는 결과가 없어요!"
+        lb.numberOfLines = 0
+        lb.textAlignment = .center
         return lb
     }()
     
@@ -170,13 +179,7 @@ extension SearchViewController {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        errorMessage.text = "두근두근 어떤 책을 검색할까~"
-        DispatchQueue.main.async {
-//            self.searchBookImage.image = nil
-//            self.searchTitle.text = nil
-//            self.searchAuthor.text = nil
-
-        }
+        errorMessage.text = nil
     }
     
     

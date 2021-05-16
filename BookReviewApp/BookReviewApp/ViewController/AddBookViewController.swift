@@ -28,7 +28,6 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         view.backgroundColor = CustomColor().defaultBackgroundColor
         addTopTitle()
-//        setupScrollView()
         contentsConfigure()
  
         keyboardSetup()
@@ -36,28 +35,13 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        scrollView.contentSize = CGSize(width: view.frame.size.width, height: 700)
     }
+    
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
 
-//    func setupScrollView() {
-//        scrollView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        view.addSubview(scrollView)
-//
-//        NSLayoutConstraint.activate([
-//            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-//            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-//            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor),
-//            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-//
-//        ])
-//    }
-   
-    
     // Button Control
     let imgAddButton : UIButton = {
         let bt = UIButton()
@@ -112,13 +96,15 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         let authorData = authorInput.text!
         let dateData = dateInput.text!
 //        let key = FirebaseDB.dbref.childByAutoId().key
-        let imgData = "보통의 존재.png"
+        let imgData = "언제 들어도 좋은 말.png"
         
-        if titleData != "" && authorData != "" && dateData != "" {
-            let data = ["title": titleData,"author": authorData,"date": dateData, "image" : imgData]
-            FirebaseDB.dbref.child("0/bookList/\(cnt)").setValue(data)
-            cnt += 1
+        DispatchQueue.main.async {
+            if titleData != "" && authorData != "" && dateData != "" {
+                let data = ["title": titleData,"author": authorData,"date": dateData, "image" : imgData]
+                FirebaseDB.dbref.child("0/bookList/\(2)").setValue(data)
+            }
         }
+        
         
         
         self.dismiss(animated: true, completion: nil)

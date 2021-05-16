@@ -15,42 +15,42 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     let headerColor = UIColor(hexString: "4ec5a5")
     let navAppearance = UINavigationBarAppearance()
     
-    ////// 재 정비
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "segue1" {
-//            let vc = segue.destination as? DetailViewController
+    // if you made collectionview programmatically, you can use collectionview just call "collectionView"
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addTopTitle()
+        fetchData()
+        
+    
+    }
+    
+    override func loadView() {
+        super.loadView()
+        addCollectionView()
+        
+    }
+    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        print("흐차")
 //
-//            vc?.modalPresentationStyle = .popover
-//        } else if segue.identifier == "segue0" {
-//            let vc = segue.destination as? DetailViewController
-//
-//            vc?.modalPresentationStyle = .popover
+//        DispatchQueue.main.async {
+//            self.addCollectionView()
 //        }
 //    }
+//
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+    }
     
-   
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .default
     }
     
-    public func randomColor() -> String {
-        let colorList = ["#eaac9d","f0daa4","#117893", "#fd823e","4ec5a5"]
-        let index = Int.random(in: 0..<colorList.count)
-         
-        return colorList[index]
-    }
-    
-    // if you made collectionview programmatically, you can use collectionview just call "collectionView"
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        addTopTitle()
-        addCollectionView()
-//        fetchJson()
-        fetchData()
-    }
-    
-
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -88,9 +88,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         
         cell.section = sections[indexPath.item]
-        cell.collectionView.reloadData()
-        
-        
+
         return cell
     }
     
@@ -103,16 +101,9 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("sss : \(indexPath.row)")
-        // 책 제목으로 segue 연결
-        var itemCount = sections[indexPath.item].bookList.count
-        var seg = sections[indexPath.item].bookList
-        print("SS: \(seg)")
-        // move view
-        
+
         self.present(DetailViewController(), animated: true, completion: nil)
         DetailViewController().name = sections[indexPath.row].title
-        // 재정비        
-        
     }
     
     
@@ -133,9 +124,8 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
                        // print("FEtching",section.playlists)
                         print("------section : \(section)")
                         self.sections.append(section)
+                        
                     }
-                    
-                 
                   self.collectionView.reloadData()
                   }
               } catch {
@@ -151,16 +141,19 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 if let result = snapshot.value as? [Any] {
                     result.forEach { (item) in
                         let section = Section(dictionary: item as! [String : Any])
-                        print("---test section \(section)")
-                        
-                        self.sections.append(section)
-                        
+//                        print("---test section \(section)")
+
+                        if !self.sections.contains(section) {
+                            self.sections.append(section)
+                            
+                        }
                         
                     }
                     self.collectionView.reloadData()
                 }
                 
             }
+        
     }
     
     
@@ -177,7 +170,6 @@ extension ViewController  {
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderCollectionReusableView", for: indexPath) as! HeaderCollectionReusableView
         
         header.configure()
-        header.backgroundColor = headerColor
         
         return header
     }
@@ -192,6 +184,7 @@ extension ViewController  {
     }
 }
 
+// stretch
 class stretchHeaderFlowLayout: UICollectionViewFlowLayout {
 
     let idealCellWidth: CGFloat = 100
@@ -236,13 +229,19 @@ class stretchHeaderFlowLayout: UICollectionViewFlowLayout {
 extension ViewController {
     func addCollectionView() {
         
-//        let flowLayout = UICollectionViewFlowLayout()
-        let flowLayout = stretchHeaderFlowLayout()
+        // normal
+        let flowLayout = UICollectionViewFlowLayout()
+        // stretchable
+//        let flowLayout = stretchHeaderFlowLayout()
         flowLayout.scrollDirection = .vertical
+        // 고정
+//        flowLayout.sectionHeadersPinToVisibleBounds = true
+        
         
         collectionView = UICollectionView(frame: CGRect(x: 0, y: 200, width: self.view.frame.width, height: self.view.frame.height), collectionViewLayout: flowLayout)
         collectionView.backgroundColor = CustomColor().defaultBackgroundColor
         collectionView.showsVerticalScrollIndicator = false
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -261,14 +260,15 @@ extension ViewController {
             let lb = UILabel()
             lb.text = "기억"
 //            lb.font = UIFont(name: "Sweetheat-GOvoG", size: 20)
-            lb.textColor = CustomColor().defaultBackgroundColor
+            lb.textColor = CustomColor().textColor
             
             return lb
         }()
-        
-        self.navigationController?.navigationBar.backgroundColor = headerColor
-        self.navigationController?.navigationBar.barTintColor = headerColor
-        self.navigationController?.setStatusBar(backgroundColor: headerColor)
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+
+        self.navigationController?.navigationBar.backgroundColor = CustomColor().defaultBackgroundColor
+        self.navigationController?.navigationBar.barTintColor = CustomColor().defaultBackgroundColor
+        self.navigationController?.setStatusBar(backgroundColor: CustomColor().defaultBackgroundColor)
         
         self.navigationController?.navigationBar.topItem?.title = label.text
         
@@ -316,10 +316,21 @@ extension UINavigationController {
         } else {
             statusBarFrame = UIApplication.shared.statusBarFrame
         }
+        
+//        if #available(iOS 13.0, *) {
+//            if UITraitCollection.current.userInterfaceStyle == .dark {
+//                UIUserInterfaceStyle.light
+//            } else {
+//                UIUserInterfaceStyle.dark
+//            }
+//        }
         let statusBarView = UIView(frame: statusBarFrame)
         statusBarView.backgroundColor = backgroundColor
+        
+        
         view.addSubview(statusBarView)
     }
+   
 
 }
 

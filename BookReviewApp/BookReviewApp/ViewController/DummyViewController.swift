@@ -32,7 +32,7 @@ class DummyViewController: UIViewController {
         self.view.addSubview(closeButton)
         
         closeButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(50)
+            $0.top.equalToSuperview().offset(30)
             $0.left.equalToSuperview().offset(20)
         }
     }

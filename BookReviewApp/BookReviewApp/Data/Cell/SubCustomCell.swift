@@ -14,16 +14,17 @@ class SubCustomCell: UICollectionViewCell {
 //    var parentViewController: UIViewController? = nil
     
     var booklist: BookList? {
+        
         didSet {
             // 수정 필요
-                print("booklist", self.booklist)
+            print("TEST booklist", self.booklist)
+            print("여기여기여기여기 \(ViewController().sections)")
             guard let booklist = self.booklist else { return }
             self.ImageView.image = UIImage(named: booklist.image)
             self.TitleLabel.text = self.booklist?.title
             self.AuthorLabel.text = self.booklist?.author
             self.DateLabel.text = self.booklist?.date
-            
-        }
+        }        
     }
 
     // containerView > ImageView
@@ -54,27 +55,21 @@ class SubCustomCell: UICollectionViewCell {
     let TitleLabel: UILabel = {
         let lb = UILabel()
         lb.textColor = CustomColor().textColor
-        lb.font = UIFont.systemFont(ofSize: 12)
-        lb.font = UIFont.boldSystemFont(ofSize: 12)
-        lb.text = "This is Book Title"
+        lb.font = CustomFont().title_main
         return lb
     }()
 
     let AuthorLabel : UILabel = {
         let lb = UILabel()
         lb.textColor = CustomColor().textColor
-        lb.font = UIFont.systemFont(ofSize: 10)
-        lb.font = UIFont.boldSystemFont(ofSize: 10)
-        lb.text = "Lee Cha Min"
+        lb.font = CustomFont().subtitle_main
         return lb
     }()
     
     let DateLabel : UILabel = {
         let lb = UILabel()
         lb.textColor = .gray
-        lb.font = UIFont.systemFont(ofSize: 10)
-        lb.font = UIFont.boldSystemFont(ofSize: 10)
-        lb.text = "Lee Cha Min"
+        lb.font = CustomFont().subtitle_main
         return lb
     }()
     

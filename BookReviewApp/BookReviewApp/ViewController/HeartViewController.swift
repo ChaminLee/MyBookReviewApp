@@ -9,21 +9,16 @@ import UIKit
 
 class HeartViewController: UIViewController {
 
-    let headerView : UIView? = UIView()
-    let scrollView = UIScrollView()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = CustomColor().defaultBackgroundColor
         addTopTitle()
         self.navigationItem.title = "최애"
-            
-//        headerView?.frame(forAlignmentRect: CGRect(x: 0, y: 20, width: self.view.frame.width, height: self.view.frame.height/6))
-//        headerView?.backgroundColor = .white
-        
-//        self.view.addSubview(headerView ?? UIView())
-        
     }
  
+    
+    
+    
 }
 
 

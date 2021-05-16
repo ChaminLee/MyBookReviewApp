@@ -15,21 +15,21 @@ class CustomCell : UICollectionViewCell, UICollectionViewDelegate, UICollectionV
     
     var section: Section? {
         didSet {
-            
+
             guard let section = self.section else { return }
+            
             self.sectionTitleLabel.text = section.title
             self.section?.bookList.forEach({ (item) in
-                 let booklist = BookList(dictionary: item as! [String : Any])
+                let booklist = BookList(dictionary: item as! [String : Any])
                 if !self.booklists.contains(booklist) {
                     self.booklists.append(booklist)
                 }
-                 
+
             })
             
-            self.collectionView.reloadData()
         }
     }
-    
+
     
     
     lazy var booklists = [BookList]()
@@ -55,10 +55,9 @@ class CustomCell : UICollectionViewCell, UICollectionViewDelegate, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! SubCustomCell
-//        cell.parentViewController = ViewController()
+
         
         cell.booklist = booklists[indexPath.item]
-        
         
         return cell
     }
