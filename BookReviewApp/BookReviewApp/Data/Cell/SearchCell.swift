@@ -15,7 +15,8 @@ class SearchCell: UITableViewCell {
     
     let searchBookImage : UIImageView = {
         let img = UIImageView()
-        img.image = UIImage(named: "보통의 존재")
+        // 검색 결과 없을 때 디폴트 이미지
+        img.image = UIImage(named: "0006")
         
         img.contentMode = .scaleAspectFill // aspect유지하면서 화면에 꽉차게
         img.layer.cornerRadius = 8.0

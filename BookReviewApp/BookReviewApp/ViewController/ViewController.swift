@@ -20,16 +20,17 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
         super.viewDidLoad()
         addTopTitle()
         fetchData()
-        
-    
     }
     
     override func loadView() {
         super.loadView()
         addCollectionView()
-        
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        fetchData()
+    }
 //    override func viewWillAppear(_ animated: Bool) {
 //        super.viewWillAppear(animated)
 //        print("흐차")

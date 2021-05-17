@@ -30,6 +30,7 @@
 		C98223DF25D18FEE0024C389 /* Besar-K7MOA.otf in Resources */ = {isa = PBXBuildFile; fileRef = C98223DB25D18FEE0024C389 /* Besar-K7MOA.otf */; };
 		C98223E025D18FEE0024C389 /* Besar-K7MOA.otf in Resources */ = {isa = PBXBuildFile; fileRef = C98223DB25D18FEE0024C389 /* Besar-K7MOA.otf */; };
 		C98223E125D18FEE0024C389 /* Besar-K7MOA.otf in Resources */ = {isa = PBXBuildFile; fileRef = C98223DB25D18FEE0024C389 /* Besar-K7MOA.otf */; };
+		C98DF5C52652695800B84FE5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98DF5C42652695700B84FE5 /* LoginViewController.swift */; };
 		C98EAA06261CA194003BCEF7 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = C98EAA05261CA194003BCEF7 /* SnapKit */; };
 		C99351A82631DFAF0009B725 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C99351A72631DFAF0009B725 /* SearchCell.swift */; };
 		C996755B262F356F009B5CA9 /* SearchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C996755A262F356F009B5CA9 /* SearchData.swift */; };
@@ -115,6 +116,7 @@
 		C98223D025D18CAB0024C389 /* Sweetheat-GOvoG.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sweetheat-GOvoG.ttf"; sourceTree = "<group>"; };
 		C98223DA25D18FED0024C389 /* Besar-2Oj4l.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Besar-2Oj4l.ttf"; sourceTree = "<group>"; };
 		C98223DB25D18FEE0024C389 /* Besar-K7MOA.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Besar-K7MOA.otf"; sourceTree = "<group>"; };
+		C98DF5C42652695700B84FE5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		C99351A72631DFAF0009B725 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		C996755A262F356F009B5CA9 /* SearchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchData.swift; sourceTree = "<group>"; };
 		C998E66925C254F800FD518C /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				C982236D25C53F750024C389 /* DetailViewController.swift */,
 				C998E74425C533AD00FD518C /* SearchViewController.swift */,
 				C97F74E525F8FDF100F87F9D /* DummyViewController.swift */,
+				C98DF5C42652695700B84FE5 /* LoginViewController.swift */,
 				C98223A825D106990024C389 /* AddBookViewController.swift */,
 				C98223B025D108DE0024C389 /* HeartViewController.swift */,
 				C998E6D525C401CA00FD518C /* UserInfoViewController.swift */,
@@ -604,6 +607,7 @@
 				C998E74525C533AD00FD518C /* SearchViewController.swift in Sources */,
 				C998E6C125C2EE5D00FD518C /* HeaderCollectionReusableView.swift in Sources */,
 				C98223B125D108DE0024C389 /* HeartViewController.swift in Sources */,
+				C98DF5C52652695800B84FE5 /* LoginViewController.swift in Sources */,
 				C996755B262F356F009B5CA9 /* SearchData.swift in Sources */,
 				C9737FF225823CA600214652 /* ViewController.swift in Sources */,
 				C9737FEE25823CA600214652 /* AppDelegate.swift in Sources */,

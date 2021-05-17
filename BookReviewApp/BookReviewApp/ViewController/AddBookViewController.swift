@@ -33,10 +33,17 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         keyboardSetup()
         hideKeyboardWhenTappedAround()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        ViewController().addCollectionView()
+        ViewController().fetchData()
+        ViewController().collectionView.reloadData()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
-    
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
@@ -104,9 +111,7 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
                 FirebaseDB.dbref.child("0/bookList/\(2)").setValue(data)
             }
         }
-        
-        
-        
+        ViewController().collectionView.reloadData()
         self.dismiss(animated: true, completion: nil)
     }
     

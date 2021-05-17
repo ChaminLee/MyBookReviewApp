@@ -36,7 +36,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         // 바로 띄우기
         handleShowSearchBar()
 //        if self.searchRes.count == 0 {
@@ -63,20 +62,17 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         myTableView.dataSource = self
         myTableView.delegate = self
         
+        self.myTableView.addSubview(self.errorMessage)
+        
+        self.errorMessage.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(30)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(100)
+        }
         
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.searchRes.count == 0 {
-            self.myTableView.addSubview(self.errorMessage)
-            self.errorMessage.text = "찾으시는 결과가 없어요!😕 \n 직접 추가하려면 '기록하기' 이동"
-            
-            self.errorMessage.snp.makeConstraints {
-                $0.top.equalToSuperview().offset(30)
-                $0.centerX.equalToSuperview()
-                $0.height.equalTo(100)
-            }
-        }
         return self.searchRes.count
     }
     
@@ -84,10 +80,11 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: SearchCell.searchIdentifier, for: indexPath) as! SearchCell
         let item = self.searchRes[indexPath.row]
         do {
-            let imageURL = URL(string: "\(item.image)")
-            let imageData = try Data(contentsOf: imageURL!)
-            let realImg = UIImage(data: imageData)
-            cell.searchBookImage.image = realImg
+            if let imageURL = URL(string: "\(item.image)") {
+                let imageData = try Data(contentsOf: imageURL)
+                let realImg = UIImage(data: imageData)
+                cell.searchBookImage.image = realImg
+            }
         } catch {
 
         }
@@ -124,7 +121,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let lb = UILabel()
         lb.font = CustomFont().title_section
         lb.textColor = CustomColor().textColor
-//        lb.text = "찾으시는 결과가 없어요!"
         lb.numberOfLines = 0
         lb.textAlignment = .center
         return lb
@@ -162,8 +158,9 @@ extension SearchViewController {
         showSearchBarButton(shouldShow: true)
         searchBar.placeholder = "책 제목을 입력해주세요."
         searchBar.tintColor = .black
-        var sb = searchBar.value(forKey: "searchField") as? UITextField
+        let sb = searchBar.value(forKey: "searchField") as? UITextField
         sb?.textColor = CustomColor().textColor
+        self.errorMessage.text = nil
         
     }
     
@@ -229,7 +226,17 @@ extension SearchViewController {
                 self.myTableView.reloadData()
                 print("디스패치이잉")
             }
+            
+            if items.count == 0 {
+                DispatchQueue.main.async {
+                    print("없는뎅?")
+                    self.errorMessage.text = "찾으시는 결과가 없어요!😕 \n 직접 추가하려면 '기록하기' 이동"
+                }
+            }
         }
+        
+        
+        
          
     }
     
@@ -238,7 +245,7 @@ extension SearchViewController {
         let clientID: String = "KDWnDVsw4IA3CV7MP5xX"
         let clientPW: String = "_vyuCxyyDF"
         
-        let query: String = "https://openapi.naver.com/v1/search/book.json?query=\(customQuery)"
+        let query: String = "https://openapi.naver.com/v1/search/book.json?query=\(customQuery)&display=50"
         let encodedQuery: String = query.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
         print(encodedQuery)
         let queryURL: URL = URL(string: encodedQuery)!

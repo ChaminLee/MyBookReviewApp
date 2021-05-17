@@ -33,7 +33,7 @@ class DetailViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
-    
+
     
     let closeButton : UIButton = {
         let bt = UIButton()
