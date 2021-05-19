@@ -78,11 +78,25 @@ class CustomCell : UICollectionViewCell, UICollectionViewDelegate, UICollectionV
         // Segue 자리
         let nextVC = DetailViewController()
         nextVC.name = booklists[indexPath.item].title
-        
-        
+        nextVC.author = booklists[indexPath.item].author
+        nextVC.bookimg = UIImage(named: "\(booklists[indexPath.item].image)") 
+//        do {
+//            print("이미지 붙이는 중~ \(booklists[indexPath.item].image)")
+//            if let imageURL = URL(string: "\(booklists[indexPath.item].image)") {
+//                let imageData = try Data(contentsOf: imageURL)
+//                let realImg = UIImage(data: imageData)
+//                nextVC.bookimg = realImg
+//            }
+//        } catch {
+//
+//        }
+
         
         DispatchQueue.main.async {
-            self.getTopVC()?.present(nextVC, animated: true, completion: nil)
+            let vc = self.getTopVC()
+//            vc?.modalPresentationStyle = .overFullScreen
+        
+            vc?.present(nextVC, animated: true, completion: nil)
         }
     }
     
@@ -93,6 +107,7 @@ class CustomCell : UICollectionViewCell, UICollectionViewDelegate, UICollectionV
         while let presentedVC = topMostVC?.presentedViewController {
             topMostVC = presentedVC
         }
+        topMostVC?.modalPresentationStyle = UIModalPresentationStyle(rawValue: 0)!
         return topMostVC
     }
     

@@ -11,15 +11,11 @@ import SnapKit
 class DetailViewController: UIViewController {
  
     var name : String?
+    var author : String?
     var bookimg : UIImage?
     let identifier = "showDetail"
     
-    let mainSection : UIView = {
-        let view = UIView()
-        view.backgroundColor = .red
-        
-        return view
-    }()
+    let mainSection = UIView()
     let infoSection = UITableView()
     
     
@@ -49,10 +45,27 @@ class DetailViewController: UIViewController {
     let titleText : UILabel = {
         let lb = UILabel()
 //        lb.text = "책 제목"
-        lb.font = UIFont(name: "Helvetica-Bold", size: 20)
+        lb.font = CustomFont().title_header
         lb.textColor = CustomColor().textColor
         
         return lb
+    }()
+    
+    let authorText : UILabel = {
+        let lb = UILabel()
+        lb.font = CustomFont().title_header
+        lb.textColor = CustomColor().textColor
+        
+        return lb
+    }()
+    
+    let bookCover : UIImageView = {
+        let img = UIImageView()
+        
+        img.contentMode = .scaleAspectFill
+        img.layer.cornerRadius = 8.0
+        img.layer.masksToBounds = true
+        return img
     }()
     
     let pvbutton : UIButton = {
@@ -81,10 +94,19 @@ class DetailViewController: UIViewController {
         if let name = self.name {
             titleText.text = name
         }
+        if let img = self.bookimg {
+            bookCover.image = img
+        }
+        if let author = self.author {
+            authorText.text = author
+        }
+        
         
         self.view.addSubview(closeButton)
         self.view.addSubview(pvbutton)
         self.view.addSubview(titleText)
+        self.mainSection.addSubview(bookCover)
+        self.mainSection.addSubview(authorText)
         
         closeButton.snp.makeConstraints {
             $0.top.equalToSuperview().offset(70)
@@ -107,6 +129,16 @@ class DetailViewController: UIViewController {
             $0.height.equalTo(200)
         }
         
+        bookCover.snp.makeConstraints {
+            $0.top.left.equalToSuperview().offset(20)
+            $0.bottom.equalToSuperview().offset(-20)
+            $0.width.equalTo(100)
+        }
+        
+        authorText.snp.makeConstraints {
+            $0.top.equalTo(bookCover.snp.top)
+            $0.left.equalTo(bookCover.snp.right).offset(20)
+        }
     }
     
     @objc func close() {
