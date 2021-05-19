@@ -103,8 +103,10 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("sss : \(indexPath.row)")
 
-        self.present(DetailViewController(), animated: true, completion: nil)
-        DetailViewController().name = sections[indexPath.row].title
+        let vc = DetailViewController()
+        vc.name = sections[indexPath.row].title
+        self.present(vc, animated: true, completion: nil)
+
     }
     
     

@@ -79,11 +79,22 @@ class CustomCell : UICollectionViewCell, UICollectionViewDelegate, UICollectionV
         let nextVC = DetailViewController()
         nextVC.name = booklists[indexPath.item].title
         
-        nextVC.modalPresentationStyle = .fullScreen
-        self.window?.rootViewController?.present(nextVC, animated: true, completion: nil)
         
+        
+        DispatchQueue.main.async {
+            self.getTopVC()?.present(nextVC, animated: true, completion: nil)
+        }
     }
     
+    func getTopVC() -> UIViewController? {
+        var topMostVC = UIApplication.shared.windows.first {$0.isKeyWindow}?.rootViewController
+            
+        
+        while let presentedVC = topMostVC?.presentedViewController {
+            topMostVC = presentedVC
+        }
+        return topMostVC
+    }
     
     
     // button action 관련

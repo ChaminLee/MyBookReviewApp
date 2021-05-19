@@ -9,13 +9,15 @@ import UIKit
 import FirebaseAuth
 import SnapKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     let emailTF = UITextField(frame: CGRect(x: 0, y: 0, width: 150.0, height: 0))
     let pwTF = UITextField(frame: CGRect(x: 0, y: 0, width: 150.0, height: 0))
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        keyboardSetup()
+        tapBackground()
         configure()
 
     }
@@ -64,15 +66,24 @@ class LoginViewController: UIViewController {
     }()
     
     @objc func login() {
-        let navigationController = UIApplication.shared.keyWindow?.rootViewController as! UINavigationController
-        navigationController.pushViewController(TabBarViewController(), animated: true)
+        let vc = TabBarViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+        print("rr")
     }
     
     func configure() {
         self.keyboardSetup()
         view.backgroundColor = CustomColor().defaultBackgroundColor
-        emailTF.addBottomBorder()
-        pwTF.addBottomBorder()
+        
+        self.emailTF.addBottomBorder()
+        self.pwTF.addBottomBorder()
+
+        emailTF.placeholder = "이메일을 입력해주세요"
+        pwTF.placeholder = "비밀번호를 입력해주세요"
+        
+        emailTF.delegate = self
+        pwTF.delegate = self
         
         view.addSubview(loginImage)
         view.addSubview(emailTitle)
@@ -90,9 +101,8 @@ class LoginViewController: UIViewController {
             $0.top.equalTo(loginImage.snp.bottom).offset(20)
         }
         emailTF.snp.makeConstraints {
-            $0.top.equalTo(emailTitle.snp.bottom)
-            $0.left.equalTo(emailTitle.snp.right).offset(20)
-            $0.right.equalTo(loginButton.snp.right)
+            $0.top.equalTo(emailTitle.snp.top)
+            $0.left.equalTo(emailTitle.snp.right).offset(30)
         }
         pwTitle.snp.makeConstraints {
             $0.top.equalTo(emailTitle.snp.bottom).offset(20)
@@ -100,8 +110,8 @@ class LoginViewController: UIViewController {
         }
         
         pwTF.snp.makeConstraints {
-            $0.top.equalTo(pwTitle.snp.bottom)
-            $0.left.equalTo(pwTitle.snp.right).offset(20)
+            $0.top.equalTo(pwTitle.snp.top)
+            $0.left.equalTo(emailTF.snp.left)
             $0.right.equalTo(emailTF.snp.right)
         }
         
@@ -115,7 +125,7 @@ class LoginViewController: UIViewController {
         
     }
     
-    
+
     // 로그인
     
     
@@ -147,6 +157,15 @@ class LoginViewController: UIViewController {
     @objc func keyboardWillHide(_ sender: Notification) {
         view.frame.origin.y = 0
 //        contentView.frame.origin.y = 0
+    }
+    
+    func tapBackground() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
 }

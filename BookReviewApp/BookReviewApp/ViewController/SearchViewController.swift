@@ -28,7 +28,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         view.backgroundColor = CustomColor().defaultBackgroundColor
         
         addTopTitle()
-//        config()
         setSearchBar()
         setTableView()
         initializeHideKeyboard()
@@ -38,11 +37,6 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidAppear(animated)
         // 바로 띄우기
         handleShowSearchBar()
-//        if self.searchRes.count == 0 {
-//            errorMessage.text = "돋보기를 눌러 책을 검색해보세요!"
-//        }
-        
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -161,7 +155,7 @@ extension SearchViewController {
         let sb = searchBar.value(forKey: "searchField") as? UITextField
         sb?.textColor = CustomColor().textColor
         self.errorMessage.text = nil
-        
+        tapBackground()
     }
     
     @objc func handleShowSearchBar() {
@@ -301,4 +295,18 @@ extension SearchViewController: UITextFieldDelegate {
         //In short- Dismiss the active keyboard.
         view.endEditing(true)
     }
+}
+
+
+extension SearchViewController {
+    func tapBackground() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(SearchViewController.dissmissKeyboard))
+        tap.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dissmissKeyboard() {
+        self.view.endEditing(true)
+    }
+    
 }

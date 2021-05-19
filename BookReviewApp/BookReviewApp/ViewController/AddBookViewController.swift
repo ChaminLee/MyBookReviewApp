@@ -34,12 +34,6 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         hideKeyboardWhenTappedAround()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        ViewController().addCollectionView()
-        ViewController().fetchData()
-        ViewController().collectionView.reloadData()
-    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -324,7 +318,7 @@ extension AddBookViewController {
 extension UITextField {
     func addBottomBorder(){
         let bottomLine = CALayer()
-        bottomLine.frame = CGRect(x: 0, y: self.frame.size.height - 1, width: self.frame.size.width, height: 1)
+        bottomLine.frame = CGRect(x: 0.0, y: self.frame.size.height - 1.0, width: self.frame.size.width, height: 1.0)
         bottomLine.backgroundColor = CustomColor().textColor.cgColor
         borderStyle = .none
         layer.addSublayer(bottomLine)
