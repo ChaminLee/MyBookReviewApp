@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DummyViewController: UIViewController {
+class AddDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

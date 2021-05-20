@@ -45,23 +45,11 @@ class HeaderCollectionReusableView: UICollectionReusableView {
         return view
     }()
     
-    let testbutton : UIButton = {
-        let bt = UIButton()
-        bt.titleLabel?.text = "프린트 버튼"
-        bt.titleLabel?.textColor = .white
-        bt.addTarget(self, action: #selector(testprint), for: .touchUpInside)
-        return bt
-    }()
-
-    @objc func testprint() {
-        print("이것 봐라! \(ViewController().sections)")
-    }
     
     public func configure() {
         addSubview(cardView)
         cardView.addSubview(descriptionLabel)
         cardView.addSubview(titleLabel)
-        cardView.addSubview(testbutton)
         
         cardView.snp.makeConstraints {
             $0.top.left.equalToSuperview().offset(10)
@@ -80,10 +68,6 @@ class HeaderCollectionReusableView: UICollectionReusableView {
             $0.right.equalToSuperview().offset(-13)
         }
         
-        testbutton.snp.makeConstraints {
-            $0.top.equalTo(titleLabel.snp.top)
-            $0.right.equalTo(titleLabel.snp.left).offset(-20)
-        }
     }
 }
     

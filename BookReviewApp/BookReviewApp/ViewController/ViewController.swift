@@ -8,6 +8,10 @@
 import UIKit
 import Firebase
 
+protocol CustomCellProtocol {
+    func pushNav(_ vc: UIViewController)
+}
+
 class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout{
     
     let identifier: String = "cellID"
@@ -20,6 +24,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
         super.viewDidLoad()
         addTopTitle()
         fetchData()
+        configNav()
     }
     
     override func loadView() {
@@ -87,7 +92,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! CustomCell
         
-        
+        cell.delegate = self
         cell.section = sections[indexPath.item]
 
         return cell
@@ -105,7 +110,10 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
 
         let vc = DetailViewController()
         vc.name = sections[indexPath.row].title
-        self.present(vc, animated: true, completion: nil)
+//        self.present(vc, animated: true, completion: nil)
+        
+//        let rootVC = DetailViewController()
+        navigationController?.pushViewController(vc, animated: true)
 
     }
     
@@ -337,5 +345,11 @@ extension UINavigationController {
 
 }
 
-
-
+extension ViewController: CustomCellProtocol {
+    func pushNav(_ vc: UIViewController) {
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    func configNav() {
+        self.navigationController?.navigationBar.tintColor = .black
+    }
+}

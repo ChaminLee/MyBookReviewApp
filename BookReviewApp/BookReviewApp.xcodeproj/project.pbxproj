@@ -17,7 +17,7 @@
 		C973800525823CB100214652 /* BookReviewAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C973800425823CB100214652 /* BookReviewAppTests.swift */; };
 		C973801025823CB100214652 /* BookReviewAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C973800F25823CB100214652 /* BookReviewAppUITests.swift */; };
 		C97F74DE25F7B45400F87F9D /* colorSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97F74DD25F7B45400F87F9D /* colorSet.swift */; };
-		C97F74E625F8FDF100F87F9D /* DummyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97F74E525F8FDF100F87F9D /* DummyViewController.swift */; };
+		C97F74E625F8FDF100F87F9D /* AddDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C97F74E525F8FDF100F87F9D /* AddDetailViewController.swift */; };
 		C982236E25C53F750024C389 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C982236D25C53F750024C389 /* DetailViewController.swift */; };
 		C98223A925D106990024C389 /* AddBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98223A825D106990024C389 /* AddBookViewController.swift */; };
 		C98223B125D108DE0024C389 /* HeartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C98223B025D108DE0024C389 /* HeartViewController.swift */; };
@@ -65,6 +65,7 @@
 		C9C03AE6264D6D02006735FB /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C03AE5264D6D02006735FB /* CustomFont.swift */; };
 		C9C03AE7264D6D02006735FB /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C03AE5264D6D02006735FB /* CustomFont.swift */; };
 		C9C03AE8264D6D02006735FB /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C03AE5264D6D02006735FB /* CustomFont.swift */; };
+		C9C3D4F32656AEA3008B5860 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9C3D4F22656AEA3008B5860 /* DetailCell.swift */; };
 		C9C49E1625A6A7860078116F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C9C49E1525A6A7860078116F /* GoogleService-Info.plist */; };
 		C9C7E440260F72920087E90F /* test.json in Resources */ = {isa = PBXBuildFile; fileRef = C9C7E43F260F72920087E90F /* test.json */; };
 		DCDE0A2403F28EDDF3980C2B /* Pods_BookReviewApp_BookReviewAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE05FFB0D62F52808B6E91AF /* Pods_BookReviewApp_BookReviewAppUITests.framework */; };
@@ -109,7 +110,7 @@
 		C973800F25823CB100214652 /* BookReviewAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookReviewAppUITests.swift; sourceTree = "<group>"; };
 		C973801125823CB100214652 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C97F74DD25F7B45400F87F9D /* colorSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = colorSet.swift; sourceTree = "<group>"; };
-		C97F74E525F8FDF100F87F9D /* DummyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyViewController.swift; sourceTree = "<group>"; };
+		C97F74E525F8FDF100F87F9D /* AddDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddDetailViewController.swift; sourceTree = "<group>"; };
 		C982236D25C53F750024C389 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C98223A825D106990024C389 /* AddBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddBookViewController.swift; sourceTree = "<group>"; };
 		C98223B025D108DE0024C389 /* HeartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +137,7 @@
 		C9C03AC6264D6AE5006735FB /* NotoSansKR-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Regular.otf"; sourceTree = "<group>"; };
 		C9C03AC7264D6AE6006735FB /* NotoSansKR-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSansKR-Medium.otf"; sourceTree = "<group>"; };
 		C9C03AE5264D6D02006735FB /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
+		C9C3D4F22656AEA3008B5860 /* DetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCell.swift; sourceTree = "<group>"; };
 		C9C49E1525A6A7860078116F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C9C7E43F260F72920087E90F /* test.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = test.json; sourceTree = "<group>"; };
 		D6DC5A6CEA72C5CE8A6079EB /* Pods-BookReviewAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookReviewAppTests.debug.xcconfig"; path = "Target Support Files/Pods-BookReviewAppTests/Pods-BookReviewAppTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -263,11 +265,11 @@
 		C998E6DA25C401D200FD518C /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				C98DF5C42652695700B84FE5 /* LoginViewController.swift */,
 				C9737FF125823CA600214652 /* ViewController.swift */,
 				C982236D25C53F750024C389 /* DetailViewController.swift */,
+				C97F74E525F8FDF100F87F9D /* AddDetailViewController.swift */,
 				C998E74425C533AD00FD518C /* SearchViewController.swift */,
-				C97F74E525F8FDF100F87F9D /* DummyViewController.swift */,
-				C98DF5C42652695700B84FE5 /* LoginViewController.swift */,
 				C98223A825D106990024C389 /* AddBookViewController.swift */,
 				C98223B025D108DE0024C389 /* HeartViewController.swift */,
 				C998E6D525C401CA00FD518C /* UserInfoViewController.swift */,
@@ -279,9 +281,10 @@
 		C998E6DF25C40CAF00FD518C /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				C998E6C025C2EE5D00FD518C /* HeaderCollectionReusableView.swift */,
 				C998E68725C2576D00FD518C /* CustomCell.swift */,
 				C998E68C25C257B600FD518C /* SubCustomCell.swift */,
-				C998E6C025C2EE5D00FD518C /* HeaderCollectionReusableView.swift */,
+				C9C3D4F22656AEA3008B5860 /* DetailCell.swift */,
 				C99351A72631DFAF0009B725 /* SearchCell.swift */,
 			);
 			path = Cell;
@@ -604,6 +607,7 @@
 				C9B72D59260F151D00334E5E /* FirebaseDB.swift in Sources */,
 				C97F74DE25F7B45400F87F9D /* colorSet.swift in Sources */,
 				C9C03AE6264D6D02006735FB /* CustomFont.swift in Sources */,
+				C9C3D4F32656AEA3008B5860 /* DetailCell.swift in Sources */,
 				C998E74525C533AD00FD518C /* SearchViewController.swift in Sources */,
 				C998E6C125C2EE5D00FD518C /* HeaderCollectionReusableView.swift in Sources */,
 				C98223B125D108DE0024C389 /* HeartViewController.swift in Sources */,
@@ -617,7 +621,7 @@
 				C99351A82631DFAF0009B725 /* SearchCell.swift in Sources */,
 				C998E68825C2576D00FD518C /* CustomCell.swift in Sources */,
 				C998E68D25C257B600FD518C /* SubCustomCell.swift in Sources */,
-				C97F74E625F8FDF100F87F9D /* DummyViewController.swift in Sources */,
+				C97F74E625F8FDF100F87F9D /* AddDetailViewController.swift in Sources */,
 				C998E6D625C401CA00FD518C /* UserInfoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

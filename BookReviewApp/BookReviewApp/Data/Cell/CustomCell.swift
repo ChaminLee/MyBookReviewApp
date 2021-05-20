@@ -9,9 +9,11 @@
 import UIKit
 
 
+
 class CustomCell : UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource,
                    UICollectionViewDelegateFlowLayout {
 
+    var delegate: CustomCellProtocol?
     
     var section: Section? {
         didSet {
@@ -76,27 +78,19 @@ class CustomCell : UICollectionViewCell, UICollectionViewDelegate, UICollectionV
         print("해당 아이템은 \(indexPath.item)번째")
         print("제목은 \(booklists[indexPath.item].title)")
         // Segue 자리
-        let nextVC = DetailViewController()
-        nextVC.name = booklists[indexPath.item].title
-        nextVC.author = booklists[indexPath.item].author
-        nextVC.bookimg = UIImage(named: "\(booklists[indexPath.item].image)") 
-//        do {
-//            print("이미지 붙이는 중~ \(booklists[indexPath.item].image)")
-//            if let imageURL = URL(string: "\(booklists[indexPath.item].image)") {
-//                let imageData = try Data(contentsOf: imageURL)
-//                let realImg = UIImage(data: imageData)
-//                nextVC.bookimg = realImg
-//            }
-//        } catch {
-//
-//        }
+        
 
         
         DispatchQueue.main.async {
-            let vc = self.getTopVC()
-//            vc?.modalPresentationStyle = .overFullScreen
-        
-            vc?.present(nextVC, animated: true, completion: nil)
+//            let vc = self.getTopVC()
+//            vc?.present(nextVC, animated: true, completion: nil)
+            print("고고")
+            let vc = DetailViewController()
+            vc.name = self.booklists[indexPath.item].title
+            vc.author = self.booklists[indexPath.item].author
+            vc.bookimg = UIImage(named: "\(self.booklists[indexPath.item].image)")
+            self.delegate?.pushNav(vc)
+            
         }
     }
     
@@ -156,3 +150,5 @@ class CustomCell : UICollectionViewCell, UICollectionViewDelegate, UICollectionV
     
     
 }
+
+

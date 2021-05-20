@@ -30,18 +30,6 @@ class DetailViewController: UIViewController {
         super.viewDidLayoutSubviews()
     }
 
-    
-    let closeButton : UIButton = {
-        let bt = UIButton()
-        bt.setImage(UIImage(systemName: "xmark"), for: .normal)
-        bt.imageView?.contentMode = .scaleAspectFit
-        bt.imageEdgeInsets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
-        bt.tintColor = CustomColor().textColor
-        bt.addTarget(self, action: #selector(close), for: .touchUpInside)
-  
-        return bt
-    }()
-    
     let titleText : UILabel = {
         let lb = UILabel()
 //        lb.text = "책 제목"
@@ -68,7 +56,7 @@ class DetailViewController: UIViewController {
         return img
     }()
     
-    let pvbutton : UIButton = {
+    let writeButton : UIButton = {
         let bt = UIButton()
         bt.setImage(UIImage(systemName: "pencil.circle"), for: .normal)
         bt.imageView?.contentMode = .scaleAspectFit
@@ -80,16 +68,16 @@ class DetailViewController: UIViewController {
     }()
     
     @objc func presentview() {
-        let nextvc = DummyViewController()
+        let nextvc = AddDetailViewController()
         self.present(nextvc, animated: true, completion: nil)
     }
     
     func setup() {
-        self.view.addSubview(infoSection)
         self.view.addSubview(mainSection)
+        self.view.addSubview(infoSection)
         
-        infoSection.backgroundColor = .red
-        mainSection.backgroundColor = .yellow
+        infoSection.backgroundColor = CustomColor().defaultBackgroundColor
+        mainSection.backgroundColor = .lightGray
         
         if let name = self.name {
             titleText.text = name
@@ -102,29 +90,25 @@ class DetailViewController: UIViewController {
         }
         
         
-        self.view.addSubview(closeButton)
-        self.view.addSubview(pvbutton)
+        self.view.addSubview(writeButton)
         self.view.addSubview(titleText)
         self.mainSection.addSubview(bookCover)
         self.mainSection.addSubview(authorText)
-        
-        closeButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(70)
-            $0.left.equalToSuperview().offset(20)
-        }
+  
         
         titleText.snp.makeConstraints {
-            $0.top.equalTo(closeButton.snp.top)
-            $0.left.equalTo(closeButton.snp.right).offset(20)
+            $0.top.equalToSuperview().offset(20)
+            $0.left.equalToSuperview().offset(20)
+            $0.right.equalTo(writeButton.snp.left).offset(-20)
         }
 
-        pvbutton.snp.makeConstraints {
+        writeButton.snp.makeConstraints {
             $0.top.equalTo(titleText.snp.top)
             $0.right.equalToSuperview().offset(-20)
         }
 
         mainSection.snp.makeConstraints {
-            $0.top.equalTo(closeButton.snp.bottom).offset(20)
+            $0.top.equalTo(titleText.snp.bottom).offset(20)
             $0.left.right.equalToSuperview()
             $0.height.equalTo(200)
         }
@@ -139,6 +123,12 @@ class DetailViewController: UIViewController {
             $0.top.equalTo(bookCover.snp.top)
             $0.left.equalTo(bookCover.snp.right).offset(20)
         }
+        
+        infoSection.snp.makeConstraints {
+            $0.top.equalTo(mainSection.snp.bottom).offset(10)
+            $0.left.right.bottom.equalToSuperview()
+        }
+        
     }
     
     @objc func close() {
