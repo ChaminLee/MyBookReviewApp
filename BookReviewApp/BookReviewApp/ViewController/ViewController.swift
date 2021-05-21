@@ -22,6 +22,7 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     // if you made collectionview programmatically, you can use collectionview just call "collectionView"
     override func viewDidLoad() {
         super.viewDidLoad()
+        addCollectionView()
         addTopTitle()
         fetchData()
         configNav()
@@ -29,11 +30,11 @@ class ViewController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     override func loadView() {
         super.loadView()
-        addCollectionView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("보일 준비")
         fetchData()
     }
 //    override func viewWillAppear(_ animated: Bool) {

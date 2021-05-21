@@ -13,12 +13,12 @@ class SubCustomCell: UICollectionViewCell {
     //    let tagListview : TagListView = TagListView()
 //    var parentViewController: UIViewController? = nil
     
+    
     var booklist: BookList? {
         
         didSet {
             // 수정 필요
             print("TEST booklist", self.booklist)
-            print("여기여기여기여기 \(ViewController().sections)")
             guard let booklist = self.booklist else { return }
             self.ImageView.image = UIImage(named: booklist.image)
             self.TitleLabel.text = self.booklist?.title

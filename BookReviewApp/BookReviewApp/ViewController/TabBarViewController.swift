@@ -77,7 +77,7 @@ class TabBarViewController: UITabBarController, UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
       if viewController.isKind(of: AddBookViewController.self) {
          let vc =  AddBookViewController()
-//         vc.modalPresentationStyle = .fullScreen
+         vc.modalPresentationStyle = .fullScreen
          self.present(vc, animated: true, completion: nil)
          return false
       }

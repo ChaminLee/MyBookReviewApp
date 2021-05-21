@@ -12,8 +12,11 @@ import SnapKit
 // present modal로
 class AddBookViewController: UIViewController, UITextFieldDelegate {
      
-//    let scrollView = UIScrollView()
+    let scrollView = UIScrollView()
 
+    
+//    var contentView = UIView()
+    
     let titleInput = UITextField(frame: CGRect(x: 10, y: 320, width: 300.0, height: 30.0))
     let authorInput = UITextField(frame: CGRect(x: 10, y: 320, width: 300.0, height: 30.0))
     let dateInput = UITextField(frame: CGRect(x: 10, y: 320, width: 300.0, height: 30.0))
@@ -34,9 +37,16 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         hideKeyboardWhenTappedAround()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        let vc = ViewController()
+        vc.fetchData()
+//        print("뷰디드디사피어")
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+//        self.scrollView.contentSize = CGSize(width: view.frame.width, height: view.frame.height * 1.2)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -90,21 +100,31 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
     }
     
     // 수정 필요
-    
-    var cnt = 0
+        
     @objc func complete() {
         let titleData = titleInput.text!
         let authorData = authorInput.text!
         let dateData = dateInput.text!
 //        let key = FirebaseDB.dbref.childByAutoId().key
         let imgData = "언제 들어도 좋은 말.png"
+        var cnt = 0
         
-        DispatchQueue.main.async {
+        print("-------------------")
+        DispatchQueue.global(qos: .background).async {
+            FirebaseDB.dbref.child("0").child("bookList").observe(DataEventType.value, with: { (snapshot) in
+                cnt = Int(snapshot.childrenCount)
+                print("값 : \(cnt)")
+            })
+        }
+        
+        DispatchQueue.global(qos: .utility).sync {
             if titleData != "" && authorData != "" && dateData != "" {
+                print("씨씨씨씨:\(cnt)")
                 let data = ["title": titleData,"author": authorData,"date": dateData, "image" : imgData]
-                FirebaseDB.dbref.child("0/bookList/\(2)").setValue(data)
+                FirebaseDB.dbref.child("0/bookList/\(cnt)").setValue(data)
             }
         }
+            
         ViewController().collectionView.reloadData()
         self.dismiss(animated: true, completion: nil)
     }
@@ -201,12 +221,20 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         titleInput.tag = 1
         authorInput.tag = 2
         dateInput.tag = 3
-
-        let subviews = [closeButton,doneButton,imgAddButton,titleText,titleInput,authorText,authorInput,dateText,dateInput]
-        subviews.map {view.addSubview($0)}
         
+        view.addSubview(scrollView)
+        view.addSubview(closeButton)
+        view.addSubview(doneButton)
+        
+        let subviews = [imgAddButton,titleText,titleInput,authorText,authorInput,dateText,dateInput]
+        subviews.map {scrollView.addSubview($0)}
+        
+        scrollView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(40)
+            $0.left.right.bottom.equalToSuperview()
+        }
         closeButton.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(20)
+            $0.top.equalToSuperview().offset(60)
             $0.left.equalToSuperview().offset(15)
         }
         
@@ -216,12 +244,12 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         }
         
         imgAddButton.snp.makeConstraints {
-            $0.top.equalTo(closeButton.snp.bottom).offset(100)
+            $0.top.equalTo(scrollView.snp.top).offset(130)
             $0.centerX.equalToSuperview()
         }
         
         titleText.snp.makeConstraints {
-            $0.top.equalTo(imgAddButton.snp.bottom).offset(140)
+            $0.top.equalTo(imgAddButton.snp.bottom).offset(100)
             $0.left.equalToSuperview().inset(30)
             $0.height.equalTo(50)
         }
@@ -269,12 +297,12 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func keyboardWillShow(_ sender: Notification) {
-        view.frame.origin.y = -50
+//        contentView.frame.origin.y = -50
 //        contentView.frame.origin.y = -100
     }
     
     @objc func keyboardWillHide(_ sender: Notification) {
-        view.frame.origin.y = 0
+//        contentView.frame.origin.y = 0
 //        contentView.frame.origin.y = 0
     }
     
