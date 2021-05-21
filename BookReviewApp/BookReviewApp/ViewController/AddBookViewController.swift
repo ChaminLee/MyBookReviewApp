@@ -109,17 +109,14 @@ class AddBookViewController: UIViewController, UITextFieldDelegate {
         let imgData = "언제 들어도 좋은 말.png"
         var cnt = 0
         
-        print("-------------------")
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInteractive).async {
             FirebaseDB.dbref.child("0").child("bookList").observe(DataEventType.value, with: { (snapshot) in
                 cnt = Int(snapshot.childrenCount)
-                print("값 : \(cnt)")
             })
         }
         
         DispatchQueue.global(qos: .utility).sync {
             if titleData != "" && authorData != "" && dateData != "" {
-                print("씨씨씨씨:\(cnt)")
                 let data = ["title": titleData,"author": authorData,"date": dateData, "image" : imgData]
                 FirebaseDB.dbref.child("0/bookList/\(cnt)").setValue(data)
             }
