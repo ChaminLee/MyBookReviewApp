@@ -6,7 +6,7 @@
 
 |홈|검색|
 |---|---|
-|<img src="https://github.com/ChaminLee/MyBookReviewApp/blob/master/images/mainViewSample.png" width="300">||
+|<img src="https://github.com/ChaminLee/MyBookReviewApp/blob/master/images/mainViewSample.png" width="300">|<img src="https://github.com/ChaminLee/MyBookReviewApp/blob/master/images/searchImg.png" width="300">|
 
 
 Skills : Swift5, GCD, SnapKit, Firebase Realtime Database, Naver Search API, HIG, Git
