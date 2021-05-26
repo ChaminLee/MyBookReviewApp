@@ -1,0 +1,36 @@
+[
+    {
+        "title":"책",
+        "bookList":[
+        {
+            "title":"2인조",
+            "image": "2인조",
+            "author" : "이석원",
+            "date" : "2021-03-10"
+        }
+        ]
+    },
+    {
+        "title":"책2",
+        "bookList":[
+        {
+            "title":"2인조",
+            "image": "2인조",
+            "author" : "이석원",
+            "date" : "2021-03-10"
+        }
+        ]
+    },
+    {
+        "title":"책3",
+        "bookList":[
+        {
+            "title":"2인조",
+            "image": "2인조",
+            "author" : "이석원",
+            "date" : "2021-03-10"
+        }
+        ]
+    }
+    
+]
