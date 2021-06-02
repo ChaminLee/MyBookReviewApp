@@ -82,7 +82,7 @@ class SearchViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } catch {
 
         }
-        var title = item.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
+        let title = item.title.replacingOccurrences(of: "<b>", with: "").replacingOccurrences(of: "</b>", with: "")
         var new = [String]()
         for i in title {
             if i != "(" {

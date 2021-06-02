@@ -36,7 +36,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     let emailTitle : UILabel = {
         let lb = UILabel()
         lb.textColor = CustomColor().textColor
-        lb.font = CustomFont().title_main
+        lb.font = CustomFont().title_header
         lb.text = "아이디"
         return lb
     }()
@@ -44,7 +44,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     let pwTitle : UILabel = {
         let lb = UILabel()
         lb.textColor = CustomColor().textColor
-        lb.font = CustomFont().title_main
+        lb.font = CustomFont().title_header
         lb.text = "비밀번호"
         return lb
     }()
@@ -53,7 +53,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let bt = UIButton()
         bt.backgroundColor = .black
         bt.setTitle("로그인", for: .normal)
-        bt.titleLabel?.font = CustomFont().title_main
+        bt.titleLabel?.font = CustomFont().title_header
         bt.titleLabel?.textColor = UIColor.white
         
         bt.contentMode = .scaleAspectFill
@@ -72,57 +72,96 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         print("rr")
     }
     
+    
+    let signupButton : UIButton = {
+        let bt = UIButton()
+        bt.backgroundColor = .systemPink
+        bt.setTitle("회원가입", for: .normal)
+        bt.titleLabel?.font = CustomFont().title_header
+        bt.titleLabel?.textColor = UIColor.white
+        
+        bt.contentMode = .scaleAspectFill
+        bt.layer.cornerRadius = 8.0
+        bt.layer.masksToBounds = true
+        
+        bt.addTarget(self, action: #selector(signup), for: .touchUpInside)
+        
+        return bt
+    }()
+    
+    @objc func signup() {
+        let vc = SignUpViewController() 
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
+        print("rr")
+    }
+    
     func configure() {
         self.keyboardSetup()
         view.backgroundColor = CustomColor().defaultBackgroundColor
         
-        self.emailTF.addBottomBorder()
-        self.pwTF.addBottomBorder()
-
-        emailTF.placeholder = "이메일을 입력해주세요"
-        pwTF.placeholder = "비밀번호를 입력해주세요"
+        [emailTF,pwTF].map { tfConfigure($0) }
         
-        emailTF.delegate = self
-        pwTF.delegate = self
+//
+//        emailTF.delegate = self
+//        pwTF.delegate = self
         
         view.addSubview(loginImage)
-        view.addSubview(emailTitle)
         view.addSubview(emailTF)
-        view.addSubview(pwTitle)
         view.addSubview(pwTF)
         view.addSubview(loginButton)
+        view.addSubview(signupButton)
         
         loginImage.snp.makeConstraints{
             $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().offset(-50)
+            $0.centerY.equalToSuperview().offset(-70)
         }
-        emailTitle.snp.makeConstraints {
-            $0.left.equalToSuperview().offset(80)
-            $0.top.equalTo(loginImage.snp.bottom).offset(20)
-        }
+
         emailTF.snp.makeConstraints {
-            $0.top.equalTo(emailTitle.snp.top)
-            $0.left.equalTo(emailTitle.snp.right).offset(30)
-        }
-        pwTitle.snp.makeConstraints {
-            $0.top.equalTo(emailTitle.snp.bottom).offset(20)
-            $0.left.equalTo(emailTitle.snp.left)
+            $0.top.equalTo(loginImage.snp.bottom).offset(20)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(300)
+            $0.height.equalTo(50)
         }
         
         pwTF.snp.makeConstraints {
-            $0.top.equalTo(pwTitle.snp.top)
-            $0.left.equalTo(emailTF.snp.left)
-            $0.right.equalTo(emailTF.snp.right)
+            $0.top.equalTo(emailTF.snp.bottom).offset(10)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(300)
+            $0.height.equalTo(50)
         }
         
         loginButton.snp.makeConstraints {
-            $0.top.equalTo(pwTitle.snp.bottom).offset(20)
-            $0.left.equalToSuperview().offset(80)
-            $0.right.equalToSuperview().offset(-80)
+            $0.top.equalTo(pwTF.snp.bottom).offset(20)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(300)
             $0.height.equalTo(50)
             
         }
+        signupButton.snp.makeConstraints {
+            $0.top.equalTo(loginButton.snp.bottom).offset(10)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(300)
+            $0.height.equalTo(50)
+        }
         
+    }
+    
+    public func tfConfigure(_ tf: UITextField) {
+        tf.layer.borderColor = UIColor.lightGray.cgColor
+        tf.layer.borderWidth = 0.5
+        tf.layer.cornerRadius = 6.0
+        tf.layer.masksToBounds = true
+        
+        if tf == emailTF {
+            tf.placeholder = " 아이디"
+        } else {
+            tf.placeholder = " 비밀번호"
+        }
+        
+        tf.font = CustomFont().title_main
+        
+        tf.delegate = self
     }
     
 
@@ -150,7 +189,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func keyboardWillShow(_ sender: Notification) {
-        view.frame.origin.y = -50
+        view.frame.origin.y = -80
 //        contentView.frame.origin.y = -100
     }
     

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4AC5683032511C1A5CACAFB3 /* Pods_BookReviewAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3019376DCA8B094D34797E67 /* Pods_BookReviewAppTests.framework */; };
 		6044B744844B84A4B5519DEF /* Pods_BookReviewApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B39F2713F3F433AEBED90C2E /* Pods_BookReviewApp.framework */; };
+		C93062B32667B0EB00619D09 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C93062B22667B0EB00619D09 /* SignUpViewController.swift */; };
 		C9737FEE25823CA600214652 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9737FED25823CA600214652 /* AppDelegate.swift */; };
 		C9737FF225823CA600214652 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9737FF125823CA600214652 /* ViewController.swift */; };
 		C9737FF525823CA600214652 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C9737FF325823CA600214652 /* Main.storyboard */; };
@@ -96,6 +97,7 @@
 		A5830CF155C52A190CB9FA1C /* Pods-BookReviewApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookReviewApp.debug.xcconfig"; path = "Target Support Files/Pods-BookReviewApp/Pods-BookReviewApp.debug.xcconfig"; sourceTree = "<group>"; };
 		AE05FFB0D62F52808B6E91AF /* Pods_BookReviewApp_BookReviewAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BookReviewApp_BookReviewAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B39F2713F3F433AEBED90C2E /* Pods_BookReviewApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BookReviewApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C93062B22667B0EB00619D09 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		C9737FEA25823CA600214652 /* BookReviewApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookReviewApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C9737FED25823CA600214652 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C9737FF125823CA600214652 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 			isa = PBXGroup;
 			children = (
 				C98DF5C42652695700B84FE5 /* LoginViewController.swift */,
+				C93062B22667B0EB00619D09 /* SignUpViewController.swift */,
 				C9737FF125823CA600214652 /* ViewController.swift */,
 				C982236D25C53F750024C389 /* DetailViewController.swift */,
 				C97F74E525F8FDF100F87F9D /* AddDetailViewController.swift */,
@@ -602,6 +605,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C93062B32667B0EB00619D09 /* SignUpViewController.swift in Sources */,
 				C982236E25C53F750024C389 /* DetailViewController.swift in Sources */,
 				C98223A925D106990024C389 /* AddBookViewController.swift in Sources */,
 				C9B72D59260F151D00334E5E /* FirebaseDB.swift in Sources */,
