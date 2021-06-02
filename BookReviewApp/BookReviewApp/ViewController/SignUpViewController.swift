@@ -102,10 +102,30 @@ class SignUpViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    let signupButton : UIButton = {
+        let bt = UIButton()
+        bt.backgroundColor = .systemPink
+        bt.setTitle("회원가입", for: .normal)
+        bt.titleLabel?.font = CustomFont().title_header
+        bt.titleLabel?.textColor = UIColor.white
+        
+        bt.contentMode = .scaleAspectFill
+        bt.layer.cornerRadius = 8.0
+        bt.layer.masksToBounds = true
+        
+        bt.addTarget(self, action: #selector(signup), for: .touchUpInside)
+        
+        return bt
+    }()
+    
+    @objc func signup() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     func configure() {
         self.view.backgroundColor = CustomColor().defaultBackgroundColor
         
-        [emailTF,emailTitle,pwTF,pwTitle,pwCheckTF,pwCheckTitle,signinLabel,nameLabel,nameTF,readLabel,readTF,closeButton].forEach { view.addSubview($0) }
+        [emailTF,emailTitle,pwTF,pwTitle,pwCheckTF,pwCheckTitle,signinLabel,nameLabel,nameTF,readLabel,readTF,closeButton,signupButton].forEach { view.addSubview($0) }
         
         [emailTF,pwTF,pwCheckTF,nameTF,readTF].forEach { LoginViewController().tfConfigure($0) }
         
@@ -177,6 +197,12 @@ class SignUpViewController: UIViewController {
             $0.height.equalTo(50)
         }
         
+        signupButton.snp.makeConstraints {
+            $0.top.equalTo(readTF.snp.bottom).offset(20)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(300)
+            $0.height.equalTo(50)
+        }
     }
     
     func keyboardSetup() {
