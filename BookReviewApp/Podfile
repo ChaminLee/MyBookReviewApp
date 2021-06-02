@@ -7,12 +7,10 @@ target 'BookReviewApp' do
 
   # Pods for BookReviewApp
 pod 'Alamofire', '~> 5.1'
-pod 'SwiftSoup', '~> 2.3.0'
 pod 'Firebase/Database'
 pod 'Firebase/Auth'
 pod 'Firebase/Firestore'
 pod 'Firebase/Analytics'
-pod 'TagListView', '~> 1.0'
 
   target 'BookReviewAppTests' do
     inherit! :search_paths
