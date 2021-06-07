@@ -8,9 +8,10 @@
 import UIKit
 import FirebaseAuth
 import SnapKit
+//import DropDown
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
-    
+        
     let emailTF = UITextField(frame: CGRect(x: 0, y: 0, width: 150.0, height: 0))
     let pwTF = UITextField(frame: CGRect(x: 0, y: 0, width: 150.0, height: 0))
     
@@ -153,13 +154,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         tf.layer.cornerRadius = 6.0
         tf.layer.masksToBounds = true
         
-        if tf == emailTF {
-            tf.placeholder = " 아이디"
-        } else {
-            tf.placeholder = " 비밀번호"
+        var placeholder = ""
+        switch tf {
+        case emailTF:
+            placeholder = " 아이디"
+        case pwTF:
+            placeholder = " 비밀번호"
+        default:
+            break
         }
         
+        tf.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor : CustomColor().tfPlaceholderColor])
         tf.font = CustomFont().title_main
+        tf.textColor = CustomColor().textColor
         
         tf.delegate = self
     }

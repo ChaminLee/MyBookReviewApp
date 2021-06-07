@@ -12,4 +12,9 @@ struct CustomColor {
     var defaultBackgroundColor: UIColor = .white
     var textColor: UIColor = .black
     var headerColor: UIColor = UIColor(hexString: "4ec5a5")
+    var tfPlaceholderColor: UIColor = .systemGray
 }
+
+//enum customColor {
+//    case defaultcolor:
+//}

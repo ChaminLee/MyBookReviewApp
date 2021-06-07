@@ -7,8 +7,10 @@
 
 import UIKit
 import SnapKit
+import FirebaseAuth
+import FirebaseFirestore
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, UITextFieldDelegate {
 
 //    let scrollView = UIScrollView()
     
@@ -19,10 +21,16 @@ class SignUpViewController: UIViewController {
     let ageTF = UITextField(frame: CGRect(x: 0, y: 0, width: 150.0, height: 0))
     let readTF = UITextField(frame: CGRect(x: 0, y: 0, width: 150.0, height: 0))
     
+    let picker = UIPickerView()
+    
+    var readbook = ["0권😑","1 ~ 2권","3 ~ 5권", "6 ~ 10권", "10권 이상"]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        setupScrollView()
         configure()
+        configPickerView()
         keyboardSetup()
         tapBackground()
     }
@@ -127,7 +135,7 @@ class SignUpViewController: UIViewController {
         
         [emailTF,emailTitle,pwTF,pwTitle,pwCheckTF,pwCheckTitle,signinLabel,nameLabel,nameTF,readLabel,readTF,closeButton,signupButton].forEach { view.addSubview($0) }
         
-        [emailTF,pwTF,pwCheckTF,nameTF,readTF].forEach { LoginViewController().tfConfigure($0) }
+        [emailTF,pwTF,pwCheckTF,nameTF,readTF].forEach { tfConfigure($0) }
         
         closeButton.snp.makeConstraints {
             $0.top.equalToSuperview().offset(60)
@@ -258,3 +266,92 @@ class SignUpViewController: UIViewController {
         view.endEditing(true)
     }
 }
+
+extension SignUpViewController {
+    func tfConfigure(_ tf: UITextField) {
+        tf.layer.borderColor = UIColor.lightGray.cgColor
+        tf.layer.borderWidth = 0.5
+        tf.layer.cornerRadius = 6.0
+        tf.layer.masksToBounds = true
+        
+        var placeholder = ""
+        
+        switch tf {
+        case emailTF:
+            placeholder = " 아이디"
+        case pwTF:
+            placeholder = " 비밀번호"
+        case pwCheckTF:
+            placeholder = " 비밀번호 재확인"
+        case nameTF:
+            placeholder = " 이름"
+        case readTF:
+            placeholder = " 평균적으로 한 달에 읽는 권 수를 입력해주세요"
+        default:
+            break
+        }
+        
+        tf.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor : CustomColor().tfPlaceholderColor])
+        tf.font = CustomFont().title_main
+        tf.textColor = CustomColor().textColor
+        
+        tf.delegate = self
+        
+    }
+}
+
+
+extension SignUpViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func configPickerView() {
+        picker.delegate = self
+        picker.dataSource = self
+        readTF.inputView = picker
+        
+        let toolBar = UIToolbar()
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor.white
+        toolBar.sizeToFit()
+        
+        let doneBT = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(self.donePicker))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelBT = UIBarButtonItem(title: "취소", style: .plain, target: self, action: #selector(self.cancelPicker))
+        
+        toolBar.setItems([cancelBT,flexibleSpace,doneBT], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        
+        readTF.inputAccessoryView = toolBar
+    }
+    
+    @objc func donePicker() {
+        let row = self.picker.selectedRow(inComponent: 0)
+        self.picker.selectRow(row, inComponent: 0, animated: false)
+        self.readTF.text = self.readbook[row]
+        self.readTF.resignFirstResponder()
+    }
+    
+    @objc func cancelPicker() {
+        self.readTF.text = nil
+        self.readTF.resignFirstResponder()
+    }
+    
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return readbook.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+//        self.view.endEditing(true)
+        return readbook[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.readTF.text = self.readbook[row]
+//        self.dropDown.isHidden = true
+    }
+}
+
