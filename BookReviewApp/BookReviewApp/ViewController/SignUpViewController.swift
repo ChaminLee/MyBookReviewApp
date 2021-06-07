@@ -121,14 +121,43 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         bt.layer.cornerRadius = 8.0
         bt.layer.masksToBounds = true
         
-        bt.addTarget(self, action: #selector(signup), for: .touchUpInside)
+        bt.addTarget(self, action: #selector(signupButttonClicked), for: .touchUpInside)
         
         return bt
     }()
     
-    @objc func signup() {
-        self.dismiss(animated: true, completion: nil)
+    
+    @objc func signupButttonClicked(_ sender: Any) {
+        var email: String = ""
+        var password: String = ""
+        if let temp = emailTF.text {
+            email = temp
+        }
+        if let temp = pwTF.text {
+            password = temp
+        }
+        
+        let signupMessage = UIAlertController(title: "", message: "", preferredStyle: UIAlertController.Style.alert)
+        
+        DispatchQueue.main.async {
+            signupMessage.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: nil))
+            
+            Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+                signupMessage.title = "회원가입"
+                if user != nil {
+                    signupMessage.message = "회원가입 성공"
+                } else {
+                    signupMessage.message = "회원가입 실패"
+                }
+            }
+        }
+        self.present(signupMessage, animated: true, completion: nil)
+        
+        
+//        self.dismiss(animated: true, completion: nil)
     }
+    
+    
     
     func configure() {
         self.view.backgroundColor = CustomColor().defaultBackgroundColor
@@ -308,6 +337,10 @@ extension SignUpViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         picker.dataSource = self
         readTF.inputView = picker
         
+        configToolbar()
+    }
+    
+    func configToolbar() {
         let toolBar = UIToolbar()
         toolBar.barStyle = UIBarStyle.default
         toolBar.isTranslucent = true
@@ -323,14 +356,14 @@ extension SignUpViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         
         readTF.inputAccessoryView = toolBar
     }
-    
+
     @objc func donePicker() {
         let row = self.picker.selectedRow(inComponent: 0)
         self.picker.selectRow(row, inComponent: 0, animated: false)
         self.readTF.text = self.readbook[row]
         self.readTF.resignFirstResponder()
     }
-    
+
     @objc func cancelPicker() {
         self.readTF.text = nil
         self.readTF.resignFirstResponder()
@@ -345,13 +378,11 @@ extension SignUpViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-//        self.view.endEditing(true)
         return readbook[row]
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.readTF.text = self.readbook[row]
-//        self.dropDown.isHidden = true
     }
 }
 
